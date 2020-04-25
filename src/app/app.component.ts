@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'consultorio-app';
+  title = 'Bienvenido a un nuevo Consultorio odont.';
+  autor: string = 'James Gomez Valverde';
 }
