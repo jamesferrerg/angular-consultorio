@@ -1,9 +1,16 @@
-<div class="card border-secondary mb-3">
+<div class="card border-secondary mb-3 mt-3">
     <div class="card-header ">Empleados</div>
     <div class="card-body text-secondary ">
         <h5 class="card-title ">Listado de empleados</h5>
 
-        <table class="table table-bordered table-striped ">
+        <div class="my-2 text-left">
+            <!-- routerLink es un directiva que permite crear links o enlaces hacia rutas internas que estan registradas en app.module -->
+            <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/empleados/form']" routerLinkActive="router-link-active">Crear empleado</button>
+        </div>
+        <div *ngIf="empleados?.length == 0" class="aler alert-info">
+            No hay registros en la base de datos!
+        </div>
+        <table class="table table-bordered table-striped" *ngIf="empleados?.length>0">
 
             <thead>
                 <tr>
@@ -13,6 +20,8 @@
                     <th>No. Identificación</th>
                     <th>Celular</th>
                     <th>Fecha de Contr.</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
 
@@ -24,6 +33,12 @@
                     <td> {{empleado.numeroIdentificacion}} </td>
                     <td> {{empleado.celular}} </td>
                     <td> {{empleado.fechaContrato}} </td>
+                    <td>
+                        <button type="button" name="editar" [routerLink]="['/empleados/form', empleado.idEmpleado]" class="btn btn-secondary btn-sm">Editar</button>
+                    </td>
+                    <td>
+                        <button type="button" name="eliminar" (click)='delete(empleado)' class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
