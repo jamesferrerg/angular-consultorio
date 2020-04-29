@@ -33,18 +33,19 @@ export class FormComponent implements OnInit {
   public create(): void{
     this.empleadoService.create(this.empleado).subscribe(
       // en esta parte se busca retornar al listado de empleados
+      // cambiamos empleado para manejar un json
       empleado => {
         this.router.navigate(['/empleados']);
-        swal.fire('Nuevo empleado', `Empleado ${empleado.nombre} ha sido creado con éxito!`, 'success');
+        swal.fire('Nuevo empleado', `El empleado ${empleado.nombre} ha sido creado con éxito!`, 'success');
       }
     );
   }
 
   update(): void{
     this.empleadoService.update(this.empleado).subscribe(
-      empleado => {
+      json => {
         this.router.navigate(['/empleados']);
-        swal.fire('Empleado actualizado', `Empleado ${empleado.nombre} ha sido actualizado!`, 'success');
+        swal.fire('Empleado actualizado', `${json.mensaje}: ${json.empleado.nombre}`, 'success');
       }
     );
   }
