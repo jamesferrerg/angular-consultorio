@@ -1,3 +1,6 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+    <li *ngFor="let itemErr of errores"> {{itemErr}} </li>
+</ul>
 <div class="card bg-white mt-3">
     <div class="card-header"> {{titulo}} </div>
     <div class="card-body">
@@ -8,7 +11,8 @@
                 <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
                 <div class="col-sm-6">
                     <!-- Se asigna una variable con # -->
-                    <input type="text" class="form-control" [(ngModel)]="empleado.nombre" name="nombre" required minlength="3" #nombre="ngModel">
+                    <input type="text" class="form-control" [(ngModel)]="empleado.nombre" name="nombre" #nombre="ngModel">
+                    <!-- required minlength="3" -->
                     <!-- dirty: a medida que se esta escribiendo muestra el mensaje de error. touched: muestra cuando se sale del input-->
                     <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
                         <div *ngIf="nombre.errors.required">
@@ -24,7 +28,8 @@
             <div class="form-group row">
                 <label for="apellido" class="col-form-label col-sm-2">Apellido</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="empleado.apellido" name="apellido" required #apellido="ngModel">
+                    <input type="text" class="form-control" [(ngModel)]="empleado.apellido" name="apellido" #apellido="ngModel">
+                    <!-- required -->
                     <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
                         <div *ngIf="apellido.errors.required">
                             El apellido es requerido
@@ -36,7 +41,8 @@
             <div class="form-group row">
                 <label for="numeroIdentificacion" class="col-form-label col-sm-2">No. identificación</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="empleado.numeroIdentificacion" name="numeroIdentificacion" required #numeroIdentificacion="ngModel">
+                    <input type="text" class="form-control" [(ngModel)]="empleado.numeroIdentificacion" name="numeroIdentificacion" #numeroIdentificacion="ngModel">
+                    <!-- required -->
                     <div class="alert alert-danger" *ngIf="numeroIdentificacion.invalid && (numeroIdentificacion.dirty || numeroIdentificacion.touched)">
                         <div *ngIf="numeroIdentificacion.errors.required">
                             El número de identificación es requerido
@@ -48,7 +54,8 @@
             <div class="form-group row">
                 <label for="email" class="col-form-label col-sm-2">Email</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="empleado.email" name="email" required email #email="ngModel">
+                    <input type="text" class="form-control" [(ngModel)]="empleado.email" name="email" #email="ngModel">
+                    <!-- required email -->
                     <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
                         <div *ngIf="email.errors.required">
                             El email es requerido

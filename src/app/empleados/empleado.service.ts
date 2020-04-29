@@ -42,7 +42,14 @@ export class EmpleadoService {
     return this.http.post(this.urlEndPoint, empleado, {headers: this.httpHeaders}).pipe(
       // Se convierte el atributo empleado en el objeto Empleado
       map( (response: any) => response.empleado as Empleado),
+      // Tambien el catchError permite manejas los errores que vienen con algun codigo del http
       catchError(e =>{
+        // Controlar los tipos de errores con el if
+        // el objeto error es e
+        if(e.status==400){
+          return throwError(e);
+        }
+
         console.error(e.error.mensaje);
         swal.fire(e.error.mensaje, e.error.error, 'error');
         // retornar el objeto excepcion o error pero convertido en un observable
@@ -54,6 +61,11 @@ export class EmpleadoService {
   getEmpleado(idEmpleado): Observable<Empleado>{
     return this.http.get<Empleado>(`${this.urlEndPoint}/${idEmpleado}`).pipe(
       catchError(e => {
+
+        if(e.status==400){
+          return throwError(e);
+        }
+
         // redirigir al cliente luego de capturar el error
         this.router.navigate(['/empleados']);
         console.error(e.error.mensaje);
