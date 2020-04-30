@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Empleado } from './empleado';
 import { EmpleadoService } from './empleado.service';
 import swal from 'sweetalert2';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-empleados',
@@ -14,9 +15,10 @@ export class EmpleadosComponent implements OnInit {
   constructor(public empleadoService: EmpleadoService) { }
 
   ngOnInit(): void {
-    this.empleadoService.getEmpleados().subscribe(
-      empleados => this.empleados = empleados
-    );
+    this.empleadoService.getEmpleados().pipe(
+      // ejemplo cambiando los parametros en el subscribe y usarlo en el tap
+      tap(empleados => this.empleados = empleados))
+    .subscribe();
   }
 
   delete(empleado: Empleado): void{

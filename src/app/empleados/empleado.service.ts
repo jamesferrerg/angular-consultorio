@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { formatDate, DatePipe} from '@angular/common';
 import { Empleado } from './empleado';
 // se usa el observable para que funcione la clase de forma reactiva y asincrona
 // el of para comvertir el arreglo en un observable
 import { of, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import swal from 'sweetalert2';
 
 import { Router } from '@angular/router';
@@ -28,9 +29,29 @@ export class EmpleadoService {
     por ejemplo el empleado */
     // metodo pipe nos permite agregar mas operadores
     return this.http.get(this.urlEndPoint).pipe(
+      /* Tap: para poder realizar alguna tarea con los valores o items, es decir realizar 
+      alguna tarea, proceso pero sin modificar lo valores en si mismo. Ej: guardar algo o 
+      registar estos datos en log o asignar a un atributo de la clase */
+      tap(response => {
+        let empleados = response as Empleado[];
+        console.log('Tap 1')
+        empleados.forEach( empleado => {
+          console.log(empleado.nombre);
+        });
+      }),
       /* map permite convertir a un listado de empleados --- se toma response que 
       viene en un formato json y se convierte en un listado o arreglode empleados*/
-      map (response => response as Empleado[])
+      map (response => {
+        // se crea variable para ser usada y convertir el tipo de fecha a otro formato
+        let empleados = response as Empleado[];
+        return empleados.map(empleado => {
+          
+          // se crea una instancia para datepipe
+          let datePipe = new DatePipe('es-CO');
+          //empleado.fechaContrato = datePipe.transform(empleado.fechaContrato, 'dd MMMM, yyyy'); // formatDate(empleado.fechaContrato, 'dd-MM-yyyy', 'en-US');
+          return empleado;
+        });
+      })
     );
   }
 

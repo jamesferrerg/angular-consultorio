@@ -32,7 +32,8 @@
                     <td> {{empleado.apellido}} </td>
                     <td> {{empleado.numeroIdentificacion}} </td>
                     <td> {{empleado.celular}} </td>
-                    <td> {{empleado.fechaContrato}} </td>
+                    <!-- El caracter | es el pipe en angular -->
+                    <td> {{empleado.fechaContrato | date:"dd MMMM, yyyy"}} </td>
                     <td>
                         <button type="button" name="editar" [routerLink]="['/empleados/form', empleado.idEmpleado]" class="btn btn-secondary btn-sm">Editar</button>
                     </td>
