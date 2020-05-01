@@ -15,6 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es-CO';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+
 
 registerLocaleData(localeES, 'es-CO');
 
@@ -41,7 +45,8 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule, MatDatepickerModule, MatMomentDateModule
   ],
   providers: [EmpleadoService, {provide: LOCALE_ID, useValue: 'es-CO' }],
   bootstrap: [AppComponent]
