@@ -3,6 +3,7 @@ import { Empleado } from './empleado';
 import { EmpleadoService } from './empleado.service';
 import swal from 'sweetalert2';
 import { tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-empleados',
@@ -11,26 +12,50 @@ import { tap } from 'rxjs/operators';
 export class EmpleadosComponent implements OnInit {
 
   empleados: Empleado[];
+  paginador: any;
 
-  constructor(public empleadoService: EmpleadoService) { }
+  constructor(public empleadoService: EmpleadoService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.empleadoService.getEmpleados().pipe(
+    /* se busca detectar el parametro cuando cambia de pagina, por lo cual se necesita un observable 
+    para que vigile cuando el parametro cambia se actualiza la consulta de la pagina web con los rangos
+    El enrutador reutiliza la misma instancia del componente cuando se vuelve a navegar a traves de el (paginador).
+    Cuando este se esta cambiando de una pagina a otra, se esta navegando dentro del mismo componente
+    pero unicamente cambia el parametro de la ruta cada vez que se accede (paginador donde se avnza
+    por las distintas paginas hacia adelante o atras). Por eso es mejor reutilizar la misma instancia
+    del componente y actualize el parametro page*/
+    // Con la propiedad paramMap es el encargado de observar
+    // Dentro de subcribe se pasa el objeto params que contiene los parametros
+    this.activatedRoute.paramMap.subscribe( params => {
+    // params.get('page') es un string por lo que debe convetirse a un number
+    // el operador + automaticamente convierte este parametro en un integer
+    let page: number = +params.get('page');
+    // cuando no exista el parametro page con un valor se le asignara el valor de 0
+    if(!page){
+      page = 0;
+    }
+    this.empleadoService.getEmpleados(page).pipe(
       // ejemplo cambiando los parametros en el subscribe y usarlo en el tap
-      tap(empleados => this.empleados = empleados))
-    .subscribe();
+      tap(response => {
+        (response.content as Empleado[]).forEach(empleado =>{});
+      }))
+    .subscribe(response => {
+      this.empleados = response.content as Empleado[];
+      /* recordar que el response ademas de contener el listado de los empleados
+      contiene los atributos del paginador */
+      this.paginador = response;
+    });
+    });
   }
 
   delete(empleado: Empleado): void{
-    
     const swalWithBootstrapButtons = swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger'
       },
       buttonsStyling: false
-    })
-    
+    });
     swalWithBootstrapButtons.fire({
       title: 'Está seguro?',
       text: `¿Seguro que desea elminar el empleado ${empleado.nombre} ${empleado.apellido}?`,
@@ -45,15 +70,13 @@ export class EmpleadosComponent implements OnInit {
           response => {
             // Con lo siguiente se actualiza la lista de empleados
             this.empleados = this.empleados.filter( empl => empl !== empleado)
-          }
-        )
+          });
         swalWithBootstrapButtons.fire(
           'Empleado eliminado!',
           `Empleado ${empleado.nombre} ${empleado.apellido} fue eliminado con éxito.`,
           'success'
-        )
-      }
-    })
+        )}
+    });
 
   }
 

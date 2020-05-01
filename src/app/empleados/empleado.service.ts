@@ -21,36 +21,33 @@ export class EmpleadoService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getEmpleados(): Observable<Empleado[]>{
+  getEmpleados(page: number): Observable<any>{
     /* convertir o cast ya que es un observable con <Empleado[]>
     return this.http.get<Empleado[]>(this.urlEndPoint); */
 
     /* el operador map: permite convertir el tipo json se convierte o castea al tipo objeto
     por ejemplo el empleado */
     // metodo pipe nos permite agregar mas operadores
-    return this.http.get(this.urlEndPoint).pipe(
+    return this.http.get(this.urlEndPoint + '/page/' + page ).pipe(
       /* Tap: para poder realizar alguna tarea con los valores o items, es decir realizar 
       alguna tarea, proceso pero sin modificar lo valores en si mismo. Ej: guardar algo o 
       registar estos datos en log o asignar a un atributo de la clase */
-      tap(response => {
-        let empleados = response as Empleado[];
-        console.log('Tap 1')
-        empleados.forEach( empleado => {
+      tap((response: any) => {
+        // se realiza el cast response as Empleado[]
+        (response.content as Empleado[]).forEach( empleado => {
           console.log(empleado.nombre);
         });
       }),
       /* map permite convertir a un listado de empleados --- se toma response que 
       viene en un formato json y se convierte en un listado o arreglode empleados*/
-      map (response => {
-        // se crea variable para ser usada y convertir el tipo de fecha a otro formato
-        let empleados = response as Empleado[];
-        return empleados.map(empleado => {
-          
+      map ((response: any) => {
+        (response.content as Empleado[]).map(empleado => {
           // se crea una instancia para datepipe
-          let datePipe = new DatePipe('es-CO');
-          //empleado.fechaContrato = datePipe.transform(empleado.fechaContrato, 'dd MMMM, yyyy'); // formatDate(empleado.fechaContrato, 'dd-MM-yyyy', 'en-US');
+          // let datePipe = new DatePipe('es-CO');
+          // empleado.fechaContrato = datePipe.transform(empleado.fechaContrato, 'dd MMMM, yyyy'); // formatDate(empleado.fechaContrato, 'dd-MM-yyyy', 'en-US');
           return empleado;
         });
+        return response;
       })
     );
   }

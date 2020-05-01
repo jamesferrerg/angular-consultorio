@@ -6,11 +6,12 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
+import { FormComponent } from './empleados/form.component';
+import { PaginatorComponent } from './paginator/paginator.component';
 import { EmpleadoService } from './empleados/empleado.service';
 // usado para que todo cargue en una sola pagina
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { FormComponent } from './empleados/form.component';
 import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es-CO';
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/empleados', pathMatch: 'full'},
   {path: 'directivas', component: DirectivaComponent},
   {path: 'empleados', component: EmpleadosComponent},
+  {path: 'empleados/page/:page', component: EmpleadosComponent},
   {path: 'empleados/form', component: FormComponent},
   {path: 'empleados/form/:idEmpleado', component: FormComponent}
 ]
@@ -32,7 +34,8 @@ const routes: Routes = [
     FooterComponent,
     DirectivaComponent,
     EmpleadosComponent,
-    FormComponent
+    FormComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,

@@ -43,6 +43,10 @@
                 </tr>
             </tbody>
         </table>
+        <!-- ahora a traves de un atributo o directiva permite inyectar la pagina al componente [paginador] -->
+        <!-- debe validarse de que el paginador exista con ngif, que se halla asignado a traves del componente padre
+        en empleados.componente.ts en this.paginador = response, para luego inyectarlo al hijo-->
+        <paginator-nav *ngIf="paginador" [paginador]="paginador"></paginator-nav>
 
 
     </div>
