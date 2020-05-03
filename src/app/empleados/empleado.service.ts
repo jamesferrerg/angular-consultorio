@@ -116,4 +116,22 @@ export class EmpleadoService {
       })
     );
   }
+
+  subirFoto(archivo: File, idEmpleado): Observable<Empleado>{
+    // para soportar el multipart/form-data de javascript
+    let formData = new FormData();
+    // mismo nombre del backend (archivo)
+    formData.append("archivo", archivo);
+    formData.append("idEmpleado", idEmpleado);
+    // recordar convertir el observable y sea objeto o empleado con pipe
+    return this.http.post(`${this.urlEndPoint}/upload`, formData).pipe(
+      map( (response: any) => response.empleado as Empleado),
+      catchError(e => {
+        console.error(e.error.mensaje);
+        swal.fire(e.error.mensaje, e.error.error, 'error');
+        // retornar el objeto excepcion o error pero convertido en un observable
+        return throwError(e);
+      })
+    );
+  }
 }

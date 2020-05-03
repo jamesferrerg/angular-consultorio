@@ -18,6 +18,7 @@ import localeES from '@angular/common/locales/es-CO';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { DetalleComponent } from './empleados/detalle/detalle.component';
 
 
 registerLocaleData(localeES, 'es-CO');
@@ -39,7 +40,8 @@ const routes: Routes = [
     DirectivaComponent,
     EmpleadosComponent,
     FormComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,

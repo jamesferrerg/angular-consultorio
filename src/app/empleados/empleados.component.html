@@ -1,3 +1,5 @@
+<detalle-empleado *ngIf="empleadoSeleccionado" [empleado]="empleadoSeleccionado"></detalle-empleado>
+
 <div class="card border-secondary mb-3 mt-3">
     <div class="card-header ">Empleados</div>
     <div class="card-body text-secondary ">
@@ -14,7 +16,7 @@
 
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th># Perfil</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>No. Identificación</th>
@@ -27,7 +29,11 @@
 
             <tbody>
                 <tr *ngFor="let empleado of empleados">
-                    <td> {{empleado.idEmpleado}} </td>
+                    <td>
+                        <!-- si existe la foto o sea diferente a nulo -->
+                        <img (click)="abrirModal(empleado)" *ngIf="empleado?.foto" src="http://localhost:8080/api/uploads/img/{{empleado.foto}}" alt="{{empleado.foto}}" class="img-thumbnail rounded" style="width: 64px; cursor:pointer">
+                        <img (click)="abrirModal(empleado)" *ngIf="!empleado?.foto" src="http://localhost:8080/images/no-usuario.png" alt="Sin foto" class="img-thumbnail rounded" style="width: 64px; cursor:pointer">
+                    </td>
                     <td> {{empleado.nombre}} </td>
                     <td> {{empleado.apellido}} </td>
                     <td> {{empleado.numeroIdentificacion}} </td>

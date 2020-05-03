@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Empleado } from './empleado';
 import { EmpleadoService } from './empleado.service';
+import { ModalService } from './detalle/modal.service';
 import swal from 'sweetalert2';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,8 +14,11 @@ export class EmpleadosComponent implements OnInit {
 
   empleados: Empleado[];
   paginador: any;
+  empleadoSeleccionado: Empleado;
 
-  constructor(public empleadoService: EmpleadoService, private activatedRoute: ActivatedRoute) { }
+  constructor(public empleadoService: EmpleadoService, 
+    private modalService: ModalService, 
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     /* se busca detectar el parametro cuando cambia de pagina, por lo cual se necesita un observable 
@@ -45,6 +49,15 @@ export class EmpleadosComponent implements OnInit {
       contiene los atributos del paginador */
       this.paginador = response;
     });
+    });
+    this.modalService.notificarUpload.subscribe(empleado => {
+      // por cada empleado el map nos permite cambiar algo de el
+      this.empleados = this.empleados.map(empleadoOriginal => {
+        if(empleado.idEmpleado == empleadoOriginal.idEmpleado){
+          empleadoOriginal.foto = empleado.foto;
+        }
+        return empleadoOriginal;
+      });
     });
   }
 
@@ -78,6 +91,11 @@ export class EmpleadosComponent implements OnInit {
         )}
     });
 
+  }
+
+  abrirModal(empleado: Empleado){
+    this.empleadoSeleccionado = empleado;
+    this.modalService.abrirModal();
   }
 
 }
