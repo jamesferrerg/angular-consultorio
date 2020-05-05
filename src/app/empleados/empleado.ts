@@ -1,3 +1,5 @@
+import { TipoIdentificacion } from './tipoIdentificacion';
+
 export class Empleado {
     idEmpleado: number;
     nombre: string;
@@ -8,4 +10,5 @@ export class Empleado {
     email: string;
     fechaContrato: string;
     foto: string;
+    tipoIdentificacion: TipoIdentificacion;
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { formatDate, DatePipe} from '@angular/common';
 import { Empleado } from './empleado';
+import { TipoIdentificacion } from './tipoIdentificacion';
 // se usa el observable para que funcione la clase de forma reactiva y asincrona
 // el of para comvertir el arreglo en un observable
 import { of, Observable, throwError } from 'rxjs';
@@ -9,6 +10,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import swal from 'sweetalert2';
 
 import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -133,5 +135,9 @@ export class EmpleadoService {
         return throwError(e);
       })
     );
+  }
+
+  getTipodIdentificacion(): Observable<TipoIdentificacion[]>{
+    return this.http.get<TipoIdentificacion[]>(this.urlEndPoint + '/tiposIdentificacion');
   }
 }

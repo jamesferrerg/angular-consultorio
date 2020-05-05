@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Empleado } from './empleado';
+import { TipoIdentificacion } from './tipoIdentificacion';
 import { EmpleadoService } from './empleado.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
@@ -11,6 +12,7 @@ import swal from 'sweetalert2';
 export class FormComponent implements OnInit {
 
   public empleado: Empleado = new Empleado();
+  tiposIdentificacion: TipoIdentificacion[];
   public titulo: string = "Crear empleado";
 
   public errores: string[];
@@ -21,6 +23,8 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarEmpleado();
+    this.empleadoService.getTipodIdentificacion().subscribe(tiposIdentificacion =>
+      this.tiposIdentificacion = tiposIdentificacion);
   }
 
   cargarEmpleado(): void{
@@ -60,6 +64,16 @@ export class FormComponent implements OnInit {
         console.log(err.error.errors);
       }
     );
+  }
+
+  // Aparezca en el select del editar
+  compararIdentificacion(o1: TipoIdentificacion, o2: TipoIdentificacion): boolean{
+    // la opcion de --- seleccionar ... ---
+    if (o1 === undefined && o2 === undefined){
+      return true;
+    }
+    // si cualquiera de los dos objetos es null retorna falso
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idTipoIdentificacion===o2.idTipoIdentificacion;
   }
 
 }
