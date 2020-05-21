@@ -10,8 +10,8 @@ import { FormComponent } from './empleados/form.component';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { EmpleadoService } from './empleados/empleado.service';
 // usado para que todo cargue en una sola pagina
-import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es-CO';
@@ -19,6 +19,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DetalleComponent } from './empleados/detalle/detalle.component';
+import { LoginComponent } from './empleados/login.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthGuard } from './empleados/guards/auth.guard';
+import { RoleGuard } from './empleados/guards/role.guard';
+import { TokenInterceptor } from './empleados/interceptors/token.interceptor';
+import { AuthInterceptor } from './empleados/interceptors/auth.interceptor';
 
 
 registerLocaleData(localeES, 'es-CO');
@@ -28,8 +34,9 @@ const routes: Routes = [
   {path: 'directivas', component: DirectivaComponent},
   {path: 'empleados', component: EmpleadosComponent},
   {path: 'empleados/page/:page', component: EmpleadosComponent},
-  {path: 'empleados/form', component: FormComponent},
-  {path: 'empleados/form/:idEmpleado', component: FormComponent}
+  {path: 'empleados/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'empleados/form/:idEmpleado', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'login', component: LoginComponent}
 ]
 
 @NgModule({
@@ -41,16 +48,21 @@ const routes: Routes = [
     EmpleadosComponent,
     FormComponent,
     PaginatorComponent,
-    DetalleComponent
+    DetalleComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    BrowserAnimationsModule, MatDatepickerModule, MatMomentDateModule
+    BrowserAnimationsModule, MatDatepickerModule, MatMomentDateModule,
+    FontAwesomeModule
   ],
-  providers: [EmpleadoService, {provide: LOCALE_ID, useValue: 'es-CO' }],
+  providers: [EmpleadoService,
+    { provide: LOCALE_ID, useValue: 'es-CO' },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

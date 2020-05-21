@@ -5,6 +5,7 @@ import { ModalService } from './detalle/modal.service';
 import swal from 'sweetalert2';
 import { tap, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-empleados',
@@ -17,7 +18,8 @@ export class EmpleadosComponent implements OnInit {
   empleadoSeleccionado: Empleado;
 
   constructor(public empleadoService: EmpleadoService, 
-    private modalService: ModalService, 
+    private modalService: ModalService,
+    public authService: AuthService,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {

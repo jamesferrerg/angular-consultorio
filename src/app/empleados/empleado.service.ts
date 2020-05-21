@@ -5,11 +5,12 @@ import { TipoIdentificacion } from './tipoIdentificacion';
 // se usa el observable para que funcione la clase de forma reactiva y asincrona
 // el of para comvertir el arreglo en un observable
 import { of, Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpEvent } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 import swal from 'sweetalert2';
 
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -19,9 +20,43 @@ export class EmpleadoService {
 
   private urlEndPoint:string = 'http://localhost:8080/api/empleados';
 
-  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  /* quita por el interceptor
+  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});*/
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router/*, *por auth.interceptor* private authService: AuthService*/) { }
+
+  /* se quita por que se creo el interceptor
+  private agregarAuthorizationHeader(){
+    // obtener el token
+    let token = this.authService.token;
+    if (token != null){
+      return this.httpHeaders.append('Authorization', 'Bearer ' + token);
+    }
+    return this.httpHeaders;
+  } */
+
+  /* Se quita por que se implementa el interceptor auth.interceptor
+  private isNoAutorizado(e): boolean{
+    // 401 no autorizado y 403 prohibido o denegado el acceso
+    if (e.status == 401){
+      // cerrar sesion cuando expira el token en java
+      if (this.authService.isAuthenticated()){
+        this.authService.logout();
+      }
+      // retornar a la pagina login
+      this.router.navigate(['/login']);
+      return true;
+    }
+
+    if (e.status == 403){
+      swal.fire('Acceso denegado', `${this.authService.empleado.nombre} no tiene acceso a este recurso!`, 'warning');
+      // retornar a la pagina empleados
+      this.router.navigate(['/empleados']);
+      return true;
+    }
+
+    return false;
+  }*/
 
   getEmpleados(page: number): Observable<any>{
     /* convertir o cast ya que es un observable con <Empleado[]>
@@ -59,19 +94,31 @@ export class EmpleadoService {
   se debe convertir mi json lo que esta reotrnando en un observable tipo empleado. Para convertir
   una respuesta que viene desde el servidor se tiene que utilizar el operador MAP */
   create(empleado: Empleado): Observable<Empleado>{
-    return this.http.post(this.urlEndPoint, empleado, {headers: this.httpHeaders}).pipe(
+    // antes estaba headers: this.httpHeaders ahora para dar permiso es headers: this.agregarAuthorizationHeader()
+    return this.http.post(this.urlEndPoint, empleado
+      /*, * se quita por que cre creo el iterceptor *{headers: this.agregarAuthorizationHeader()}*/).pipe(
       // Se convierte el atributo empleado en el objeto Empleado
       map( (response: any) => response.empleado as Empleado),
       // Tambien el catchError permite manejas los errores que vienen con algun codigo del http
       catchError(e =>{
+
+        // no autorizado
+        /* se quita por aut.interceptor
+        if(this.isNoAutorizado(e)){
+          return throwError(e);
+        }*/
+
         // Controlar los tipos de errores con el if
         // el objeto error es e
-        if(e.status==400){
+        if (e.status == 400){
           return throwError(e);
         }
 
-        console.error(e.error.mensaje);
-        swal.fire(e.error.mensaje, e.error.error, 'error');
+        if (e.error.mensaje){
+          console.error(e.error.mensaje);
+        }
+        /* por auth.interceptor 
+        swal.fire(e.error.mensaje, e.error.error, 'error');*/
         // retornar el objeto excepcion o error pero convertido en un observable
         return throwError(e);
       })
@@ -79,18 +126,22 @@ export class EmpleadoService {
   }
 
   getEmpleado(idEmpleado): Observable<Empleado>{
-    return this.http.get<Empleado>(`${this.urlEndPoint}/${idEmpleado}`).pipe(
+    return this.http.get<Empleado>(`${this.urlEndPoint}/${idEmpleado}`/*, {headers: this.agregarAuthorizationHeader()}*/).pipe(
       catchError(e => {
 
-        if(e.status==400){
+        // no autorizado
+        /* se quita
+        if(this.isNoAutorizado(e)){
           return throwError(e);
+        }*/
+        if (e.status != 401 && e.error.mensaje){
+          // redirigir al cliente luego de capturar el error
+          this.router.navigate(['/empleados']);
+          console.error(e.error.mensaje);
         }
-
-        // redirigir al cliente luego de capturar el error
-        this.router.navigate(['/empleados']);
-        console.error(e.error.mensaje);
         // mensaje es el atributo que se tiene en el backend
-        swal.fire('Error al editar', e.error.mensaje, 'error');
+        /* auth.interceptor
+        swal.fire('Error al editar', e.error.mensaje, 'error');*/
         // para convertir un observable a traves de throwError
         return throwError(e);
       })
@@ -98,10 +149,25 @@ export class EmpleadoService {
   }
 
   update(empleado: Empleado): Observable<any>{
-    return this.http.put<any>(`${this.urlEndPoint}/${empleado.idEmpleado}`, empleado, {headers: this.httpHeaders}).pipe(
+    return this.http.put<any>(`${this.urlEndPoint}/${empleado.idEmpleado}`, empleado
+    /*, {headers: this.agregarAuthorizationHeader()}*/).pipe(
       catchError(e => {
-        console.error(e.error.mensaje);
-        swal.fire(e.error.mensaje, e.error.error, 'error');
+
+        // no autorizado
+        /* por auth.interceptor
+        if(this.isNoAutorizado(e)){
+          return throwError(e);
+        }*/
+
+        if (e.status == 400) {
+          return throwError(e);
+        }
+
+        if (e.error.mensaje){
+          console.error(e.error.mensaje);
+        }
+        /*
+        swal.fire(e.error.mensaje, e.error.error, 'error');*/
         // retornar el objeto excepcion o error pero convertido en un observable
         return throwError(e);
       })
@@ -109,10 +175,20 @@ export class EmpleadoService {
   }
 
   delete(idEmpleado: number): Observable<Empleado>{
-    return this.http.delete<Empleado>(`${this.urlEndPoint}/${idEmpleado}`, {headers: this.httpHeaders}).pipe(
+    return this.http.delete<Empleado>(`${this.urlEndPoint}/${idEmpleado}`/*, {headers: this.agregarAuthorizationHeader()}*/).pipe(
       catchError(e => {
-        console.error(e.error.mensaje);
-        swal.fire(e.error.mensaje, e.error.error, 'error');
+
+        // no autorizado
+        /*
+        if(this.isNoAutorizado(e)){
+          return throwError(e);
+        }*/
+
+        if (e.error.mensaje){
+          console.error(e.error.mensaje);
+        }
+        /* por auth.interceptor
+        swal.fire(e.error.mensaje, e.error.error, 'error');*/
         // retornar el objeto excepcion o error pero convertido en un observable
         return throwError(e);
       })
@@ -125,12 +201,29 @@ export class EmpleadoService {
     // mismo nombre del backend (archivo)
     formData.append("archivo", archivo);
     formData.append("idEmpleado", idEmpleado);
+
+    // se crea la instancia para dar permisos
+    /* se quita por el interceptor
+    let httpHeaders = new HttpHeaders();
+    let token = this.authService.token;
+    if (token != null){
+      httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + token);
+    }*/
+
     // recordar convertir el observable y sea objeto o empleado con pipe
-    return this.http.post(`${this.urlEndPoint}/upload`, formData).pipe(
+    return this.http.post(`${this.urlEndPoint}/upload`, formData/*, {headers: httpHeaders}*/).pipe(
       map( (response: any) => response.empleado as Empleado),
       catchError(e => {
+
+        // no autorizado
+        /* por auth.interceptor
+        if(this.isNoAutorizado(e)){
+          return throwError(e);
+        }*/
+
         console.error(e.error.mensaje);
-        swal.fire(e.error.mensaje, e.error.error, 'error');
+        /* por auth.interceptor
+        swal.fire(e.error.mensaje, e.error.error, 'error');*/
         // retornar el objeto excepcion o error pero convertido en un observable
         return throwError(e);
       })
@@ -138,6 +231,7 @@ export class EmpleadoService {
   }
 
   getTipodIdentificacion(): Observable<TipoIdentificacion[]>{
-    return this.http.get<TipoIdentificacion[]>(this.urlEndPoint + '/tiposIdentificacion');
+    // headers permitira autorizacion o acceder por el rol o/y usuario
+    return this.http.get<TipoIdentificacion[]>(this.urlEndPoint + '/tiposIdentificacion'/*, {headers: this.agregarAuthorizationHeader()}*/);
   }
 }

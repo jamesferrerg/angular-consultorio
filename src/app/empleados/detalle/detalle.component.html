@@ -22,10 +22,10 @@
                                     <li class="list-group-item">{{empleado.numeroIdentificacion}}</li>
                                     <li class="list-group-item">{{empleado.telefono}}</li>
                                     <li class="list-group-item">{{empleado.celular}}</li>
-                                    <li class="list-group-item">{{empleado.email}}</li>
+                                    <li class="list-group-item">{{empleado.username}}</li>
                                     <li class="list-group-item">{{empleado.fechaContrato | date:"dd MMMM, yyyy"}}</li>
                                 </ul>
-                                <div class="input-group">
+                                <div class="input-group" *ngIf="authService.hasRole('ROLE_ADMIN')">
                                     <div class="custom-file">
                                         <!-- onChange=cuando cambia (cuando se selcciona un archivo) -->
                                         <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">

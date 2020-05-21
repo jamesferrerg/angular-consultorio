@@ -7,8 +7,10 @@ export class Empleado {
     numeroIdentificacion: string;
     telefono: number;
     celular: number;
-    email: string;
+    username: string;
+    password: string;
     fechaContrato: string;
     foto: string;
     tipoIdentificacion: TipoIdentificacion;
+    roles: string[] = [];
 }

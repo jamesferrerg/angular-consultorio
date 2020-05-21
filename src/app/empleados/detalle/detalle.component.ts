@@ -3,6 +3,7 @@ import { Empleado } from '../empleado';
 import { EmpleadoService } from '../empleado.service';
 import { ModalService } from './modal.service';
 import swal from 'sweetalert2';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'detalle-empleado',
@@ -17,6 +18,7 @@ export class DetalleComponent implements OnInit {
   fotoSeleccionada: File;
 
   constructor(private empleadoService: EmpleadoService,
+    public authService: AuthService,
     public modalService: ModalService) { }
 
   ngOnInit(): void {
