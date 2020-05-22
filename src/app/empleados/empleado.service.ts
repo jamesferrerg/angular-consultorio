@@ -11,6 +11,7 @@ import swal from 'sweetalert2';
 
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { Sexo } from './sexo';
 
 
 @Injectable({
@@ -233,5 +234,9 @@ export class EmpleadoService {
   getTipodIdentificacion(): Observable<TipoIdentificacion[]>{
     // headers permitira autorizacion o acceder por el rol o/y usuario
     return this.http.get<TipoIdentificacion[]>(this.urlEndPoint + '/tiposIdentificacion'/*, {headers: this.agregarAuthorizationHeader()}*/);
+  }
+
+  getSexo(): Observable<Sexo[]>{
+    return this.http.get<Sexo[]>(this.urlEndPoint + '/sexos');
   }
 }

@@ -4,9 +4,12 @@
 }
 
 body {
+    display: flex;
     overflow-x: hidden;
     background: #007bff;
     background: linear-gradient(to right, #0a205e, #8498b0);
+    position: fixed;
+    width: -webkit-fill-available;
 }
 
 .card-signin {

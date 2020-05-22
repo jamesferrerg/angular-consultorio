@@ -1,4 +1,5 @@
 import { TipoIdentificacion } from './tipoIdentificacion';
+import { Sexo } from './sexo';
 
 export class Empleado {
     idEmpleado: number;
@@ -13,4 +14,7 @@ export class Empleado {
     foto: string;
     tipoIdentificacion: TipoIdentificacion;
     roles: string[] = [];
+    direccion: string;
+    barrio: string;
+    sexo: Sexo;
 }

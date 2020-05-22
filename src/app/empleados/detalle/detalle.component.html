@@ -14,17 +14,12 @@
                         <div class="row">
 
                             <div class="col-sm">
-
                                 <ul *ngIf="empleado" class="list-group mb-3">
-                                    <li class="list-group-item list-group-item-primary">{{empleado.nombre}}</li>
-                                    <li class="list-group-item">{{empleado.apellido}}</li>
-                                    <li class="list-group-item">{{empleado.tipoIdentificacion.tipoIdentificacion}}</li>
-                                    <li class="list-group-item">{{empleado.numeroIdentificacion}}</li>
-                                    <li class="list-group-item">{{empleado.telefono}}</li>
-                                    <li class="list-group-item">{{empleado.celular}}</li>
-                                    <li class="list-group-item">{{empleado.username}}</li>
-                                    <li class="list-group-item">{{empleado.fechaContrato | date:"dd MMMM, yyyy"}}</li>
+                                    <li class="list-group-item list-group-item-primary">Nombre: {{empleado.nombre}}</li>
+                                    <li class="list-group-item">Apellido: {{empleado.apellido}}</li>
                                 </ul>
+                                <!-- si existe la foto o sea diferente a nulo -->
+                                <img *ngIf="empleado?.foto" src="http://localhost:8080/api/uploads/img/{{empleado.foto}}" alt="{{empleado.foto}}" class="img-thumbnail rounded">
                                 <div class="input-group" *ngIf="authService.hasRole('ROLE_ADMIN')">
                                     <div class="custom-file">
                                         <!-- onChange=cuando cambia (cuando se selcciona un archivo) -->
@@ -35,12 +30,20 @@
                                         <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="col-sm">
-                                <!-- si existe la foto o sea diferente a nulo -->
-                                <img *ngIf="empleado?.foto" src="http://localhost:8080/api/uploads/img/{{empleado.foto}}" alt="{{empleado.foto}}" class="img-thumbnail rounded">
+                                <ul *ngIf="empleado" class="list-group mb-3">
+                                    <li class="list-group-item">{{empleado.tipoIdentificacion.tipoIdentificacion}}</li>
+                                    <li class="list-group-item">Nro: {{empleado.numeroIdentificacion}}</li>
+                                    <li class="list-group-item">Sexo: {{empleado.sexo.sexo}}</li>
+                                    <li class="list-group-item">Tel: {{empleado.telefono}}</li>
+                                    <li class="list-group-item">Cel: {{empleado.celular}}</li>
+                                    <li class="list-group-item">Correo: {{empleado.username}}</li>
+                                    <li class="list-group-item">Fecha de contratación: {{empleado.fechaContrato | date:"dd MMMM, yyyy"}}</li>
+                                    <li class="list-group-item">Dirección: {{empleado.direccion}}</li>
+                                    <li class="list-group-item">Barrio: {{empleado.barrio}}</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
