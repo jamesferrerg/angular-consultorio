@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Empleado } from './empleado';
 import { TipoIdentificacion } from './tipoIdentificacion';
+import { Sexo } from './sexo';
 import { EmpleadoService } from './empleado.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-form',
@@ -14,6 +16,7 @@ export class FormComponent implements OnInit {
 
   public empleado: Empleado = new Empleado();
   tiposIdentificacion: TipoIdentificacion[];
+  sexos: Sexo[];
   public titulo: string = "Crear empleado";
 
   public errores: string[];
@@ -26,6 +29,8 @@ export class FormComponent implements OnInit {
     this.cargarEmpleado();
     this.empleadoService.getTipodIdentificacion().subscribe(tiposIdentificacion =>
       this.tiposIdentificacion = tiposIdentificacion);
+    this.empleadoService.getSexo().subscribe(sexos =>
+      this.sexos = sexos);
   }
 
   cargarEmpleado(): void{
@@ -74,7 +79,15 @@ export class FormComponent implements OnInit {
       return true;
     }
     // si cualquiera de los dos objetos es null retorna falso
-    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idTipoIdentificacion===o2.idTipoIdentificacion;
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idTipoIdentificacion === o2.idTipoIdentificacion;
+  }
+
+  compararSexo(sx1: Sexo, sx2: Sexo): boolean{
+    if (sx1 === undefined && sx2 === undefined){
+      return true;
+    }
+    // si cualquiera de los dos objetos es null retorna falso
+    return sx1 === null || sx2 === null || sx1 === undefined || sx2 === undefined ? false : sx1.idSexo === sx2.idSexo;
   }
 
 }
