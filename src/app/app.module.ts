@@ -12,7 +12,7 @@ import { EmpleadoService } from './empleados/empleado.service';
 // usado para que todo cargue en una sola pagina
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es-CO';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,6 +25,13 @@ import { AuthGuard } from './empleados/guards/auth.guard';
 import { RoleGuard } from './empleados/guards/role.guard';
 import { TokenInterceptor } from './empleados/interceptors/token.interceptor';
 import { AuthInterceptor } from './empleados/interceptors/auth.interceptor';
+import { EmpleadoRolComponent } from './empleados/empleado-rol/empleado-rol.component';
+
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { RolFormComponent } from './empleados/empleado-rol/rol-form.component';
+
 
 
 registerLocaleData(localeES, 'es-CO');
@@ -36,7 +43,9 @@ const routes: Routes = [
   {path: 'empleados/page/:page', component: EmpleadosComponent},
   {path: 'empleados/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'empleados/form/:idEmpleado', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'perfiles', component: EmpleadoRolComponent},
+  {path: 'perfiles/form', component: RolFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}}
 ]
 
 @NgModule({
@@ -49,7 +58,9 @@ const routes: Routes = [
     FormComponent,
     PaginatorComponent,
     DetalleComponent,
-    LoginComponent
+    LoginComponent,
+    EmpleadoRolComponent,
+    RolFormComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +68,11 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule, MatDatepickerModule, MatMomentDateModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [EmpleadoService,
     { provide: LOCALE_ID, useValue: 'es-CO' },

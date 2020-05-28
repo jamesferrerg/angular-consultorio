@@ -5,6 +5,10 @@
     <div class="card-header"> {{titulo}} </div>
     <div class="card-body">
 
+        <h4 class="card-title">
+            <a [routerLink]="['/empleados']" class="btn btn-light btn-xs">&laquo; volver</a>
+        </h4>
+
         <form #empleadoForm="ngForm">
 
             <div class="form-group row">
