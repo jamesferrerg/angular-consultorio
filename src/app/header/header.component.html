@@ -12,8 +12,8 @@
             <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" [routerLink]="['/empleados']">Empleados</a>
             </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" [routerLink]="['/perfiles']">Perfil</a>
+            <li class="nav-item" routerLinkActive="active" *ngIf="authService.hasRole('ROLE_ADMIN')">
+                <a class="nav-link" [routerLink]="['/perfiles']">Roles</a>
             </li>
         </ul>
 
@@ -21,12 +21,15 @@
             <li *ngIf="!authService.isAuthenticated()">
                 <a [routerLink]="['/login']" class="btn btn-outline-dark">Iniciar sesión</a>
             </li>
+            <img *ngIf="authService.empleado.foto" src="http://localhost:8080/api/uploads/img/{{authService.empleado.foto}}" alt="{{authService.empleado.foto}}" class="header-image m-auto">
+            <img *ngIf="!authService.empleado.foto" src="http://localhost:8080/images/no-usuario.png" alt="Sin foto" class="header-image m-auto">
             <li *ngIf="authService.isAuthenticated()" class="dropdown">
-                <a class="btn btn-outline-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{authService.empleado.nombre}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <button (click)="logout()" class="dropdown-item" type="submit">Cerrar sesión</button>
+                    <a class="dropdown-item" [routerLink]="['/micuenta']">Mi cuenta</a>
+                    <a (click)="logout()" class="dropdown-item" type="submit">Cerrar sesión</a>
                 </div>
             </li>
         </ul>

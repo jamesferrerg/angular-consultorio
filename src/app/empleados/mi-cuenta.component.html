@@ -1,0 +1,30 @@
+<div class="card text-justify container mb-3 mt-3">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a ngClass="nav-link active" [routerLink]="['/micuenta']">Perfil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/cambiar-datos']">Cambiar mi contraseña</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body" *ngIf="empleado">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img *ngIf="empleado?.foto" src="http://localhost:8080/api/uploads/img/{{empleado.foto}}" alt="{{empleado.foto}}" class="card-img">
+                    <img *ngIf="!empleado?.foto" src="http://localhost:8080/images/no-usuario.png" alt="Sin foto" class="card-img">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"> {{empleado.nombre +" " + empleado.apellido}} </h5>
+                        <p class="card-text">Celular: {{empleado.celular}} </p>
+                        <p class="card-text">Tel: {{empleado.telefono}} </p>
+                        <p class="card-text">Dirección: {{empleado.direccion}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

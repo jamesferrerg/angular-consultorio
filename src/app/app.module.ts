@@ -30,7 +30,12 @@ import { EmpleadoRolComponent } from './empleados/empleado-rol/empleado-rol.comp
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { RolFormComponent } from './empleados/empleado-rol/rol-form.component';
+import { MiCuentaComponent } from './empleados/mi-cuenta.component';
+import { CambiarDatosComponent } from './empleados/cambiar-datos.component';
+import { CompareValidatorDirective } from './empleados/shared/compare-validator.directive';
 
 
 
@@ -44,8 +49,10 @@ const routes: Routes = [
   {path: 'empleados/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'empleados/form/:idEmpleado', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'login', component: LoginComponent},
-  {path: 'perfiles', component: EmpleadoRolComponent},
-  {path: 'perfiles/form', component: RolFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}}
+  {path: 'perfiles', component: EmpleadoRolComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'perfiles/form', component: RolFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'micuenta', component: MiCuentaComponent},
+  {path: 'cambiar-datos', component: CambiarDatosComponent}
 ]
 
 @NgModule({
@@ -60,7 +67,10 @@ const routes: Routes = [
     DetalleComponent,
     LoginComponent,
     EmpleadoRolComponent,
-    RolFormComponent
+    RolFormComponent,
+    MiCuentaComponent,
+    CambiarDatosComponent,
+    CompareValidatorDirective
   ],
   imports: [
     BrowserModule,
@@ -72,7 +82,9 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [EmpleadoService,
     { provide: LOCALE_ID, useValue: 'es-CO' },

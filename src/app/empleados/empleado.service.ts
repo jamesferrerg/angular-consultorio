@@ -20,6 +20,7 @@ import { Sexo } from './sexo';
 export class EmpleadoService {
 
   private urlEndPoint:string = 'http://localhost:8080/api/empleados';
+  private ulrEndPointChange:string = 'http://localhost:8080/api/cambiar-datos';
 
   /* quita por el interceptor
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});*/
@@ -239,4 +240,23 @@ export class EmpleadoService {
   getSexo(): Observable<Sexo[]>{
     return this.http.get<Sexo[]>(this.urlEndPoint + '/sexos');
   }
+
+  // edicion unicamente de contraseña
+  
+  updateInfo(empleado: Empleado): Observable<any>{
+    return this.http.put<any>(`${this.ulrEndPointChange}/${empleado.idEmpleado}`, empleado).pipe(
+      catchError(e => {
+
+        if (e.status == 400) {
+          return throwError(e);
+        }
+
+        if (e.error.mensaje){
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
 }

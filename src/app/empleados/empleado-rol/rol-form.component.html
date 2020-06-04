@@ -13,14 +13,6 @@
             <div class="form-group row">
                 <label for="empleado" class="col-form-label col-sm-2">Empleado</label>
                 <div class="col-sm-6">
-                    <!--
-                    <input type="text" placeholder="Búscar empleado" [formControl]="autocompleteControl" [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarNombre">
-                        <mat-option *ngFor="let option of usuariosFiltrados | async" [value]="option">
-                            {{option.nombre + " "+ option.apellido}}
-                        </mat-option>
-                    </mat-autocomplete>-->
-
 
                     <mat-form-field>
                         <input [(ngModel)]="empleadoRol.empleado" type="text" placeholder="Seleccione el empleado" aria-label="Empleados" matInput [formControl]="autocompleteControl" [matAutocomplete]="auto">

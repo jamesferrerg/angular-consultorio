@@ -3,9 +3,11 @@ import { AuthService } from '../empleados/auth.service';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
 
+
 @Component({
     selector: 'app-header',
-    templateUrl: './header.component.html'
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css']
 })
 export class HeaderComponent{
     title: string = 'App iniciando';

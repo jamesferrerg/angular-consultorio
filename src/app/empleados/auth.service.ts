@@ -57,6 +57,8 @@ export class AuthService {
     let payload = this.obtenerDatosToken(accessToken);
     this._empleado = new Empleado();
     this._empleado.nombre = payload.nombre;
+    this._empleado.foto = payload.foto;
+    this._empleado.idEmpleado = payload.idEmpleado;
     this._empleado.username = payload.user_name;
     this._empleado.roles = payload.authorities;
     sessionStorage.setItem('empleado', JSON.stringify(this._empleado)); 
