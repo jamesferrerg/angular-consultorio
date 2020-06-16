@@ -1,0 +1,110 @@
+<ul class="container alert alert-danger pl-4" *ngIf="errores?.length > 0">
+    <li *ngFor="let itemErr of errores"> {{itemErr}} </li>
+</ul>
+<div class="container card bg-white mt-3 mb-3">
+    <div class="card-header">Crear paciente</div>
+    <div class="card-body">
+        <h4 class="card-title">
+            <a [routerLink]="['/pacientes']" class="btn btn-light btn-xs">&laquo; volver</a>
+        </h4>
+
+        <form #pacienteForm="ngForm">
+            <fieldset class="border p-2">
+                <legend class="w-auto">Datos del paciente:</legend>
+                <div class="form-row">
+                    <div class="col-md-3 mb-1 mr-sm-5">
+                        <label for="nombre" class="col-form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" [(ngModel)]="paciente.nombre" #nombre="ngModel" placeholder="Primer y segundo nombre">
+                        <div class="aler alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                            <div *ngIf="nombre.errors.required">El nombre es requerido</div>
+                            <div *ngIf="nombre.errors.minlength">El nombre de tener minimo 3 caracteres</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mr-sm-5 mb-1">
+                        <label for="apellido" class="col-form-label">Apellido</label>
+                        <input type="text" class="form-control" name="apellido" [(ngModel)]="paciente.apellido" #apellido="ngModel" placeholder="Primer y segundo apellido">
+                        <div class="aler alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+                            <div *ngIf="apellido.errors.required">El apellido es requerido</div>
+                            <div *ngIf="apellido.errors.minlength">El apellido de tener minimo 3 caracteres</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-1">
+                        <label for="sexo" class="col-form-label">Sexo</label>
+                        <select [compareWith]="compararSexo" class="form-control" [(ngModel)]="paciente.sexo" name="sexo">
+                            <option [ngValue]="undefined">--- Seleccionar sexo ---</option>
+                            <option *ngFor="let item of sexos" [ngValue]="item">{{item.sexo}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3 mb-1 mr-sm-5">
+                        <label for="tipoIdentificacion" class="col-form-label">Tipo identificación</label>
+                        <select [compareWith]="compararIdentificacion" class="form-control" [(ngModel)]="paciente.tipoIdentificacion" name="tipoIdentificacion" style="font-size: small;">
+                            <option [ngValue]="undefined">-- Seleccionar tipo de identificación --</option>
+                            <option *ngFor="let item of tiposIdentificacion" [ngValue]="item">{{item.tipoIdentificacion}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mr-sm-5 mb-1">
+                        <label for="numeroIdentificacion" class="col-form-label">Número de identificación</label>
+                        <input type="text" class="form-control" [(ngModel)]="paciente.numeroIdentificacion" name="numeroIdentificacion" #numeroIdentificacion="ngModel" placeholder="No ingresar puntos">
+                        <div class="alert alert-danger" *ngIf="numeroIdentificacion.invalid && (numeroIdentificacion.dirty || numeroIdentificacion.touched)">
+                            <div *ngIf="numeroIdentificacion.errors.required">
+                                El número de identificación es requerido
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-1">
+                        <label for="fechaContrato" class="col-form-label">Fecha de nacimiento</label><br>
+                        <input [matDatepicker]="myDatepicker" class="form-control size-date" [(ngModel)]="paciente.fechaNacimiento" name="fechaContrato" placeholder="dd/mm/yyyy">
+                        <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #myDatepicker></mat-datepicker>
+                    </div>
+                </div>
+            </fieldset><br>
+            <fieldset class="border p-2">
+                <legend class="w-auto">Datos de contacto/otros:</legend>
+                <div class="form-row">
+                    <div class="col-md-3 mr-sm-5 mb-1">
+                        <label for="email" class="col-form-label">Email</label>
+                        <input type="email" class="form-control" [(ngModel)]="paciente.email" name="email">
+                    </div>
+                    <div class="col-md-3 mr-sm-5 mb-1">
+                        <label for="celular" class="col-form-label">Celular</label>
+                        <input type="number" class="form-control" [(ngModel)]="paciente.celular" name="celular">
+                    </div>
+                    <div class="col-md-3 mb-1">
+                        <label for="telefono" class="col-form-label">Teléfono</label>
+                        <input type="number" class="form-control" [(ngModel)]="paciente.telefono" name="telefono">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3 mr-sm-5 mb-1">
+                        <label for="direccion" class="col-form-label">Dirección</label>
+                        <input type="text" class="form-control" [(ngModel)]="paciente.direccion" name="direccion">
+                    </div>
+                    <div class="col-md-3 mr-sm-5 mb-1">
+                        <label for="barrio" class="col-form-label">Barrio</label>
+                        <input type="text" class="form-control" [(ngModel)]="paciente.barrio" name="barrio">
+                    </div>
+                    <div class="col-md-3 mb-1">
+                        <label for="direccion" class="col-form-label">Ocupación</label>
+                        <input type="text" class="form-control" [(ngModel)]="paciente.ocupacion" name="direccion">
+                    </div>
+                    <div class="col-md-3 mr-sm-5 mb-1">
+                        <label for="barrio" class="col-form-label">EPS/aseguradora</label>
+                        <input type="text" class="form-control" [(ngModel)]="paciente.aseguradora" name="barrio">
+                    </div>
+                </div>
+            </fieldset><br>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <button class="btn btn-primary" role="button" (click)='create()' [disabled]="!pacienteForm.form.valid" *ngIf="!paciente.idPaciente else elseBlock">Crear</button>
+                    <ng-template #elseBlock>
+                        <button class="btn btn-primary" role="button" (click)='update()' [disabled]="!pacienteForm.form.valid">Editar</button>
+                    </ng-template>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

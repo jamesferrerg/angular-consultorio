@@ -6,10 +6,17 @@
 body {
     display: flex;
     overflow-x: hidden;
-    background: #007bff;
-    background: linear-gradient(to right, #0a205e, #8498b0);
+    /*background: #007bff;
+    background: linear-gradient(to right, #0a205e, #8498b0);*/
+    background: url(../../images/consultorio-login.png);
+    background-size: cover;
+    display: grid;
     position: fixed;
     width: -webkit-fill-available;
+}
+
+.layer {
+    background-color: rgba(0, 0, 0, 0.54);
 }
 
 .card-signin {
@@ -101,6 +108,10 @@ body {
     padding-bottom: calc(var(--input-padding-y) / 3);
     font-size: 12px;
     color: #777;
+}
+
+.copyr {
+    font-size: small;
 }
 
 

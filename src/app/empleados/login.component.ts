@@ -3,6 +3,8 @@ import { Empleado } from './empleado';
 import swal from 'sweetalert2';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import {Subject} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +15,19 @@ export class LoginComponent implements OnInit {
 
   titulo: string = "Iniciar sesión";
   empleado: Empleado;
+  public errores: string = '';
+  private _alertClosed = new Subject<string>();
 
   constructor(private authService: AuthService, private router: Router) {
     this.empleado = new Empleado();
    }
 
   ngOnInit() {
+    this._alertClosed.subscribe(message => this.errores = message);
+    this._alertClosed.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.errores = '');
+    
     if (this.authService.isAuthenticated()){
       swal.fire('Login', `Hola ${this.authService.empleado.nombre} ya esta autenticado!`, 'info');
       this.router.navigate(['/empleados']);
@@ -27,7 +36,8 @@ export class LoginComponent implements OnInit {
 
   login(): void{
     if (this.empleado.username == null || this.empleado.password == null){
-      swal.fire('Error Login', 'Usuario o contraseña vacio!', 'error');
+      this._alertClosed.next('El usuario o contraseña no pueden estar vacios');
+      //swal.fire('Error Login', 'Usuario o contraseña vacio!', 'error');
       return;
     }
 
@@ -44,7 +54,8 @@ export class LoginComponent implements OnInit {
       swal.fire('Login', `Bienvenido ${empleado.nombre}`, 'success');
     }, err => {
       if (err.status == 400){
-        swal.fire('Error Login', 'Usuario o contraseña incorrectos!', 'error');
+        this._alertClosed.next('Usuario o contraseña incorrectos');
+        //swal.fire('Error Login', 'Usuario o contraseña incorrectos!', 'error');
       }
     });
   }

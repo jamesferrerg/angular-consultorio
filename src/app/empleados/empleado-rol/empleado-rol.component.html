@@ -1,11 +1,11 @@
-<div class="container card border-dark mb-3 mt-3">
+<div class="container card border-secondary mb-3 mt-3">
     <div class="card-header">Perfiles</div>
     <div class="card-body text-dark table-responsive">
         <h5 class="card-title">Listado de perfiles asignados</h5>
 
         <div class="my-2 text-left">
             <!-- routerLink es un directiva que permite crear links o enlaces hacia rutas internas que estan registradas en app.module -->
-            <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" type="button" [routerLink]="['/perfiles/form']" routerLinkActive="router-link-active">Asignar perfil</button>
+            <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-info" type="button" [routerLink]="['/perfiles/form']" routerLinkActive="router-link-active">Asignar perfil</button>
         </div>
         <div *ngIf="empleadosRoles?.length == 0" class="aler alert-info">
             No hay registros en la base de datos!

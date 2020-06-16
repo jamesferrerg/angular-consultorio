@@ -18,7 +18,7 @@
                         <input [(ngModel)]="empleadoRol.empleado" type="text" placeholder="Seleccione el empleado" aria-label="Empleados" matInput [formControl]="autocompleteControl" [matAutocomplete]="auto">
                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarNombre" (optionSelected)="seleccionarEmpleado($event)">
                             <mat-option *ngFor="let option of usuariosFiltrados | async" [value]="option">
-                                {{option.nombre + " "+ option.apellido}}
+                                {{option.nombre + ' ' + option.apellido}}
                             </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>

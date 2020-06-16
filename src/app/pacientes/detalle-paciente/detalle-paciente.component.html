@@ -1,0 +1,45 @@
+<div class="abrir-modal animacion fadeIn" *ngIf="modalService.modal">
+    <div class="modal" tabindex="-1" role="dialog" style="display: block;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Información del paciente</h5>
+                    <button (click)="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-sm">
+                                <ul *ngIf="paciente" class="list-group mb-3">
+                                    <li class="list-group-item list-group-item-primary">Nombre: {{paciente.nombre}}</li>
+                                    <li class="list-group-item">Apellido: {{paciente.apellido}}</li>
+                                    <li class="list-group-item">{{paciente.tipoIdentificacion.tipoIdentificacion}}</li>
+                                    <li class="list-group-item">Nro: {{paciente.numeroIdentificacion}}</li>
+                                    <li class="list-group-item">Fecha de nacimiento: {{paciente.fechaNacimiento | date:"dd MMMM, yyyy"}}</li>
+                                    <li class="list-group-item">Edad: {{paciente.edad}} años</li>
+                                </ul>
+                            </div>
+
+                            <div class="col-sm">
+                                <ul *ngIf="paciente" class="list-group mb-3">
+                                    <li class="list-group-item">Sexo: {{paciente.sexo.sexo}}</li>
+                                    <li class="list-group-item">Tel: {{paciente.telefono}}</li>
+                                    <li class="list-group-item">Cel: {{paciente.celular}}</li>
+                                    <li class="list-group-item">Correo: {{paciente.email}}</li>
+                                    <li class="list-group-item">Dirección: {{paciente.direccion}}</li>
+                                    <li class="list-group-item">Barrio: {{paciente.barrio}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button (click)="cerrarModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

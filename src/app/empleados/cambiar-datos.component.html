@@ -13,36 +13,8 @@
         </ul>
     </div>
     <div class="card-body col-sm-6" *ngIf="empleado">
-        <!--
-        <form [formGroup]="form">
-
-            <mat-form-field>
-                <input matInput type="password" name="currentPassword" placeholder="Contraseña actual">
-            </mat-form-field>
-
-            <br>
-            
-            <mat-form-field>
-                <input matInput type="password" formControlName="confirmarPassword" placeholder="Confirmar Contraseña">
-            </mat-form-field>
-
-            <mat-error class="mat-error" *ngIf="checarSiSonIguales()">Las contraseñas no coinciden</mat-error>
-
-            <br>
-
-            <button mat-raised-button (click)=updateInfo()>Enviar</button>
-            
-        </form>-->
 
         <form #f="ngForm">
-
-            <!--
-            <div class="form-group row col-sm-6">
-                <label>Contraseña actual</label>
-                <input type="password" class="form-control" [(ngModel)]="empleado.password" name="password" ngModel #password="ngModel" required>
-            </div>-->
-
-
 
             <div class="form-group row col-sm-6">
                 <label>Contraseña nueva</label>

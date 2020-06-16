@@ -36,6 +36,10 @@ import { RolFormComponent } from './empleados/empleado-rol/rol-form.component';
 import { MiCuentaComponent } from './empleados/mi-cuenta.component';
 import { CambiarDatosComponent } from './empleados/cambiar-datos.component';
 import { CompareValidatorDirective } from './empleados/shared/compare-validator.directive';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PacientesComponent } from './pacientes/pacientes.component';
+import { PacienteFormComponent } from './pacientes/paciente-form.component';
+import { DetallePacienteComponent } from './pacientes/detalle-paciente/detalle-paciente.component';
 
 
 
@@ -52,7 +56,10 @@ const routes: Routes = [
   {path: 'perfiles', component: EmpleadoRolComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'perfiles/form', component: RolFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'micuenta', component: MiCuentaComponent},
-  {path: 'cambiar-datos', component: CambiarDatosComponent}
+  {path: 'cambiar-datos', component: CambiarDatosComponent},
+  {path: 'pacientes', component: PacientesComponent},
+  {path: 'pacientes/paciente-form', component: PacienteFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'pacientes/paciente-form/:idPaciente', component: PacienteFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}}
 ]
 
 @NgModule({
@@ -70,7 +77,10 @@ const routes: Routes = [
     RolFormComponent,
     MiCuentaComponent,
     CambiarDatosComponent,
-    CompareValidatorDirective
+    CompareValidatorDirective,
+    PacientesComponent,
+    PacienteFormComponent,
+    DetallePacienteComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +94,8 @@ const routes: Routes = [
     MatInputModule,
     MatFormFieldModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    NgbModule
   ],
   providers: [EmpleadoService,
     { provide: LOCALE_ID, useValue: 'es-CO' },

@@ -7,14 +7,14 @@
 
         <div class="my-2 text-left">
             <!-- routerLink es un directiva que permite crear links o enlaces hacia rutas internas que estan registradas en app.module -->
-            <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" type="button" [routerLink]="['/empleados/form']" routerLinkActive="router-link-active">Crear empleado</button>
+            <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-info" type="button" [routerLink]="['/empleados/form']" routerLinkActive="router-link-active">Crear empleado</button>
         </div>
         <div *ngIf="empleados?.length == 0" class="aler alert-info">
             No hay registros en la base de datos!
         </div>
         <table class="table table-bordered table-striped" *ngIf="empleados?.length>0">
 
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th *ngIf="authService.hasRole('ROLE_USER')"># Perfil</th>
                     <th>Nombre</th>
@@ -41,7 +41,7 @@
                     <!-- El caracter | es el pipe en angular -->
                     <td> {{empleado.fechaContrato | date:"dd MMMM, yyyy"}} </td>
                     <td *ngIf="authService.hasRole('ROLE_ADMIN')">
-                        <button type="button" name="editar" [routerLink]="['/empleados/form', empleado.idEmpleado]" class="btn btn-secondary btn-sm">Editar</button>
+                        <button type="button" name="editar" [routerLink]="['/empleados/form', empleado.idEmpleado]" class="btn btn-outline-info btn-sm">Editar</button>
                     </td>
                     <td *ngIf="authService.hasRole('ROLE_ADMIN')">
                         <button type="button" name="eliminar" (click)='delete(empleado)' class="btn btn-danger btn-sm">Eliminar</button>
@@ -53,7 +53,6 @@
         <!-- debe validarse de que el paginador exista con ngif, que se halla asignado a traves del componente padre
         en empleados.componente.ts en this.paginador = response, para luego inyectarlo al hijo-->
         <paginator-nav *ngIf="paginador" [paginador]="paginador"></paginator-nav>
-
 
     </div>
 </div>
