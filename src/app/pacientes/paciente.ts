@@ -1,5 +1,7 @@
 import { TipoIdentificacion } from '../empleados/tipoIdentificacion';
 import { Sexo } from '../empleados/sexo';
+import { Departamento } from '../entity/departamento';
+import { Municipio } from '../entity/municipio';
 
 export class Paciente{
     idPaciente: number;
@@ -17,4 +19,6 @@ export class Paciente{
     aseguradora: number;
     tipoIdentificacion: TipoIdentificacion;
     sexo: Sexo;
+    departamento: Departamento;
+    municipio: Municipio;
 }

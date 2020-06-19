@@ -39,8 +39,8 @@
                 <div class="form-row">
                     <div class="col-md-3 mb-1 mr-sm-5">
                         <label for="tipoIdentificacion" class="col-form-label">Tipo identificación</label>
-                        <select [compareWith]="compararIdentificacion" class="form-control" [(ngModel)]="paciente.tipoIdentificacion" name="tipoIdentificacion" style="font-size: small;">
-                            <option [ngValue]="undefined">-- Seleccionar tipo de identificación --</option>
+                        <select [compareWith]="compararIdentificacion" class="form-control" [(ngModel)]="paciente.tipoIdentificacion" name="tipoIdentificacion">
+                            <option [ngValue]="undefined">-- Seleccionar identificación --</option>
                             <option *ngFor="let item of tiposIdentificacion" [ngValue]="item">{{item.tipoIdentificacion}}</option>
                         </select>
                     </div>
@@ -58,6 +58,22 @@
                         <input [matDatepicker]="myDatepicker" class="form-control size-date" [(ngModel)]="paciente.fechaNacimiento" name="fechaContrato" placeholder="dd/mm/yyyy">
                         <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
                         <mat-datepicker #myDatepicker></mat-datepicker>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3 mb-1 mr-sm-5">
+                        <label for="departamento" class="col-form-label">Lugar de nacimiento</label>
+                        <select [compareWith]="compararDepartamento" [(ngModel)]="paciente.departamento" name="departamento" class="form-control">
+                            <option [ngValue]="undefined"> -- Seleccionar departamento -- </option>
+                            <option *ngFor="let item of lugaresNac" [ngValue]="item" class="text-capitalize">{{item.departamento}}</option>
+                          </select>
+                    </div>
+                    <div class="col-md-3 mb-1" *ngIf="paciente.departamento">
+                        <label for="municipio">Municipio</label>
+                        <select class="form-control" name="municipio" [(ngModel)]="paciente.municipio" [compareWith]="compararMunicipio">
+                            <option [ngValue]="undefined">-- Seleccionar municipio --</option>
+                            <option *ngFor="let item of paciente.departamento.municipios" [ngValue]="item">{{item.municipio}}</option>
+                          </select>
                     </div>
                 </div>
             </fieldset><br>

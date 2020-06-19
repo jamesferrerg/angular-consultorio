@@ -20,12 +20,14 @@
                                     <li class="list-group-item">Nro: {{paciente.numeroIdentificacion}}</li>
                                     <li class="list-group-item">Fecha de nacimiento: {{paciente.fechaNacimiento | date:"dd MMMM, yyyy"}}</li>
                                     <li class="list-group-item">Edad: {{paciente.edad}} años</li>
+                                    <li class="list-group-item">Sexo: {{paciente.sexo.sexo}}</li>
                                 </ul>
                             </div>
 
                             <div class="col-sm">
                                 <ul *ngIf="paciente" class="list-group mb-3">
-                                    <li class="list-group-item">Sexo: {{paciente.sexo.sexo}}</li>
+                                    <li class="list-group-item text-capitalize">Lugar de nacimiento: {{paciente.departamento.departamento | lowercase}} </li>
+                                    <li class="list-group-item">Municipio - Ciudad: {{paciente.municipio.municipio}}</li>
                                     <li class="list-group-item">Tel: {{paciente.telefono}}</li>
                                     <li class="list-group-item">Cel: {{paciente.celular}}</li>
                                     <li class="list-group-item">Correo: {{paciente.email}}</li>

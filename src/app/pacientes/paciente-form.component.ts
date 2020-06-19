@@ -5,6 +5,8 @@ import { Paciente } from './paciente';
 import swal from 'sweetalert2';
 import { TipoIdentificacion } from '../empleados/tipoIdentificacion';
 import { Sexo } from '../empleados/sexo';
+import { Departamento } from '../entity/departamento';
+import { Municipio } from '../entity/municipio';
 
 @Component({
   selector: 'app-paciente-form',
@@ -17,6 +19,9 @@ export class PacienteFormComponent implements OnInit {
   public errores: string[];
   tiposIdentificacion: TipoIdentificacion[];
   sexos: Sexo[];
+  lugaresNac: Departamento[];
+  departamentoElegido: Departamento = null;
+  municipios: Municipio[] = [];
 
   constructor(private pacienteService: PacienteService, private router: Router, 
     private activatedRoute: ActivatedRoute) { }
@@ -27,6 +32,8 @@ export class PacienteFormComponent implements OnInit {
       this.tiposIdentificacion = tiposIdentificacion);
     this.pacienteService.getSexo().subscribe(sexos =>
       this.sexos = sexos);
+    this.pacienteService.getLugarNacimiento().subscribe(lugaresNac => 
+      this.lugaresNac = lugaresNac);
   }
 
   // Aparezca en el select del editar
@@ -45,6 +52,20 @@ export class PacienteFormComponent implements OnInit {
     }
     // si cualquiera de los dos objetos es null retorna falso
     return sx1 === null || sx2 === null || sx1 === undefined || sx2 === undefined ? false : sx1.idSexo === sx2.idSexo;
+  }
+
+  compararDepartamento(d1: Departamento, d2: Departamento): boolean{
+    if (d1 === undefined && d2 === undefined){
+      return true;
+    }
+    return d1 === null || d2 === null || d1 === undefined || d2 === undefined ? false : d1.idDepartamento === d2.idDepartamento;
+  }
+
+  compararMunicipio(m1: Municipio, m2: Municipio): boolean{
+    if (m1 === undefined && m2 === undefined){
+      return true;
+    }
+    return m1 === null || m2 === null || m1 === undefined || m2 === undefined ? false : m1.idMunicipio === m2.idMunicipio;
   }
 
   public create(): void{
@@ -66,7 +87,9 @@ export class PacienteFormComponent implements OnInit {
       let idPaciente = params['idPaciente']
       if (idPaciente){
         this.pacienteService.getPaciente(idPaciente).subscribe(
-          (paciente) => this.paciente = paciente);
+          (paciente) => {
+            this.paciente = paciente;
+          });
       }
     });
   }

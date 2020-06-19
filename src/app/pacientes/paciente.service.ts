@@ -6,6 +6,7 @@ import { Paciente } from './paciente';
 import { map, catchError } from 'rxjs/operators';
 import { TipoIdentificacion } from '../empleados/tipoIdentificacion';
 import { Sexo } from '../empleados/sexo';
+import { Departamento } from '../entity/departamento';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,12 @@ export class PacienteService {
 
   getSexo(): Observable<Sexo[]>{
     return this.http.get<Sexo[]>(this.urlEndPoint + '/sexos');
+  }
+
+  getLugarNacimiento(): Observable<Departamento[]>{
+    return this.http.get<Departamento[]>(this.urlEndPoint + '/departamentos').pipe(
+      map(lugaresNacimiento => lugaresNacimiento as Departamento[])
+    );
   }
 
   create(paciente: Paciente): Observable<Paciente> {
