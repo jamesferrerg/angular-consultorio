@@ -40,13 +40,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { PacienteFormComponent } from './pacientes/paciente-form.component';
 import { DetallePacienteComponent } from './pacientes/detalle-paciente/detalle-paciente.component';
-
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { OrderModule } from 'ngx-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 registerLocaleData(localeES, 'es-CO');
 
 const routes: Routes = [
-  {path: '', redirectTo: '/empleados', pathMatch: 'full'},
+  {path: '', redirectTo: '/directivas', pathMatch: 'full'},
   {path: 'directivas', component: DirectivaComponent},
   {path: 'empleados', component: EmpleadosComponent},
   {path: 'empleados/page/:page', component: EmpleadosComponent},
@@ -59,7 +60,7 @@ const routes: Routes = [
   {path: 'cambiar-datos', component: CambiarDatosComponent},
   {path: 'pacientes', component: PacientesComponent},
   {path: 'pacientes/paciente-form', component: PacienteFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
-  {path: 'pacientes/paciente-form/:idPaciente', component: PacienteFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}}
+  {path: 'pacientes/paciente-form/:idPaciente', component: PacienteFormComponent}
 ]
 
 @NgModule({
@@ -95,7 +96,10 @@ const routes: Routes = [
     MatFormFieldModule,
     MatCardModule,
     MatButtonModule,
-    NgbModule
+    NgbModule,
+    Ng2SearchPipeModule,
+    OrderModule,
+    NgxPaginationModule
   ],
   providers: [EmpleadoService,
     { provide: LOCALE_ID, useValue: 'es-CO' },

@@ -9,30 +9,30 @@
             <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/directivas">Directivas</a>
             </li>
+            <li class="nav-item" routerLinkActive="active" *ngIf="authService.hasRole('ROLE_ADMIN')">
+                <a class="nav-link " [routerLink]="[ '/empleados'] ">Empleados</a>
+            </li>
+            <li class="nav-item " routerLinkActive="active " *ngIf="authService.hasRole('ROLE_ADMIN')">
+                <a class="nav-link " [routerLink]="[ '/perfiles'] ">Roles</a>
+            </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" [routerLink]="['/empleados']">Empleados</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active" *ngIf="authService.hasRole('ROLE_ADMIN')">
-                <a class="nav-link" [routerLink]="['/perfiles']">Roles</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active" *ngIf="authService.hasRole('ROLE_ADMIN')">
-                <a class="nav-link" [routerLink]="['/pacientes']">Pacientes</a>
+                <a class="nav-link " [routerLink]="[ '/pacientes']" *ngIf="authService.isAuthenticated()">Pacientes</a>
             </li>
         </ul>
 
-        <ul class="navbar-nav navbar-right pr-5">
-            <li *ngIf="!authService.isAuthenticated()">
-                <a [routerLink]="['/login']" class="btn btn-outline-dark">Iniciar sesión</a>
+        <ul class="navbar-nav navbar-right pr-5 ">
+            <li *ngIf="!authService.isAuthenticated() ">
+                <a [routerLink]="[ '/login'] " class="btn btn-outline-dark ">Iniciar sesión</a>
             </li>
-            <img *ngIf="authService.empleado.foto" src="http://localhost:8080/api/uploads/img/{{authService.empleado.foto}}" alt="{{authService.empleado.foto}}" class="header-image m-auto">
-            <img *ngIf="!authService.empleado.foto" src="http://localhost:8080/images/no-usuario.png" alt="Sin foto" class="header-image m-auto">
-            <li *ngIf="authService.isAuthenticated()" class="dropdown">
+            <img *ngIf="authService.empleado.foto" src="http://localhost:8080/api/uploads/img/{{authService.empleado.foto}}" alt="{{authService.empleado.foto}} " class="header-image m-auto ">
+            <img *ngIf="!authService.empleado.foto" src="http://localhost:8080/images/no-usuario.png " alt="Sin foto" class="header-image m-auto">
+            <li *ngIf="authService.isAuthenticated()" class="dropdown ">
                 <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{authService.empleado.nombre}}
                 </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" [routerLink]="['/micuenta']">Mi cuenta</a>
-                    <a (click)="logout()" class="dropdown-item" type="submit">Cerrar sesión</a>
+                <div class="dropdown-menu " aria-labelledby="dropdownMenuLink ">
+                    <a class="dropdown-item " [routerLink]="['/micuenta']">Mi cuenta</a>
+                    <a (click)="logout()" class="dropdown-item " type="submit ">Cerrar sesión</a>
                 </div>
             </li>
         </ul>

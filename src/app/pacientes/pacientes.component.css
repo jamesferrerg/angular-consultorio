@@ -2,3 +2,36 @@
     padding-right: 0;
     padding-left: 0;
 }
+
+.mano {
+    cursor: pointer;
+}
+
+.my-pagination /deep/ .ngx-pagination .current {
+    z-index: 3;
+    color: #fff;
+    background: #E95420;
+    border-color: #E95420;
+}
+
+.my-pagination /deep/ .ngx-pagination a {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #E95420;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+
+/*.my-pagination /deep/ .ngx-pagination a:first-of-type {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.my-pagination /deep/ .ngx-pagination a:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}*/

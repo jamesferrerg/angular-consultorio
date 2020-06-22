@@ -2,20 +2,25 @@
 <div class="container card border-secondary mb-3 mt-3">
     <div class="card-header">Lista de pacientes</div>
     <div class="card-body text-dark table-responsive">
-        <div class="my-2 text-left">
+        <div class="my-2 d-flex justify-content-between p-2 form-inline">
             <button type="button" class="btn btn-info" [routerLink]="['/pacientes/paciente-form']">Crear paciente</button>
+            <form>
+                <div class="form-group form-inline">
+                    Buscar paciente
+                    <fa-icon [icon]="faSearch" class="ml-2 fa-lg"></fa-icon> <input class="form-control ml-2" type="text" placeholder="Buscar..." name="search" [(ngModel)]="term" />
+                </div>
+            </form>
         </div>
-
-        <form>
-            <div class="form-group form-inline">
-                Buscar paciente: <input class="form-control ml-2" type="text" placeholder="Buscar..." />
-            </div>
-        </form>
 
         <table class="table table-bordered table-striped table-hover">
             <thead class="thead-dark">
                 <tr>
-                    <th>Nombre y apellido</th>
+                    <th>#</th>
+                    <th (click)="sort('nombre')" [class.active]="order === 'nombre'" class="mano">
+                        Nombre y apellido
+                        <span [hidden]="reverse"> <fa-icon [icon]="faSortDown"></fa-icon> </span>
+                        <span [hidden]="!reverse"> <fa-icon [icon]="faSortUp"></fa-icon> </span>
+                    </th>
                     <th>No. identificacion</th>
                     <th>Celular</th>
                     <th>Más información</th>
@@ -24,7 +29,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let paciente of pacientes">
+                <tr *ngFor="let paciente of pacientes | orderBy: order: reverse | filter:term | paginate: { itemsPerPage: pageSize, currentPage: p }; let i = index">
+                    <td>{{i + 1}}</td>
                     <td> {{paciente.nombre + " " + paciente.apellido}} </td>
                     <td> {{paciente.numeroIdentificacion}} </td>
                     <td> {{paciente.celular}} </td>
@@ -40,6 +46,10 @@
                 </tr>
             </tbody>
         </table>
+        <div class="d-flex justify-content-between">
+            <pagination-controls (pageChange)="p = $event" class="my-pagination"></pagination-controls>
+        </div>
+
     </div>
 
 </div>

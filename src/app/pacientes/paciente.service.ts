@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { Paciente } from './paciente';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, filter } from 'rxjs/operators';
 import { TipoIdentificacion } from '../empleados/tipoIdentificacion';
 import { Sexo } from '../empleados/sexo';
 import { Departamento } from '../entity/departamento';

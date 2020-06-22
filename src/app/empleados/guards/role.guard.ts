@@ -29,7 +29,7 @@ export class RoleGuard implements CanActivate {
 
       swal.fire('Acceso denegado', `${this.authService.empleado.nombre} no tiene acceso a este recurso!`, 'warning');
       // retornar a la pagina empleados
-      this.router.navigate(['/empleados']);
+      this.router.navigate(['/directivas']);
       return false;
   }
 }

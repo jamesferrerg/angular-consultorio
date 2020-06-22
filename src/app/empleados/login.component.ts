@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     
     if (this.authService.isAuthenticated()){
       swal.fire('Login', `Hola ${this.authService.empleado.nombre} ya esta autenticado!`, 'info');
-      this.router.navigate(['/empleados']);
+      this.router.navigate(['/directivas']);
     }
   }
 
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       let empleado = this.authService.empleado;
 
       // direccionar a la pagina principal
-      this.router.navigate(['/empleados']);
+      this.router.navigate(['/directivas']);
       swal.fire('Login', `Bienvenido ${empleado.nombre}`, 'success');
     }, err => {
       if (err.status == 400){
