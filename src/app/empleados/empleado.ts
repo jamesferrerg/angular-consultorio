@@ -17,4 +17,5 @@ export class Empleado {
     direccion: string;
     barrio: string;
     sexo: Sexo;
+    habilitado: boolean;
 }

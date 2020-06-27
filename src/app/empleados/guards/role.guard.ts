@@ -21,15 +21,30 @@ export class RoleGuard implements CanActivate {
         return false;
       }
       // convertirlo a string
-      let role = next.data['role'] as string;
+      let roles = next.data['role'] as string[];
       // validar el error
-      if (this.authService.hasRole(role)){
-        return true;
+      let hasRole = false;
+      for (let role of roles){
+        if(this.authService.hasRole(role)){
+          hasRole = true;
+        }
       }
-
+      /*roles.forEach(role => {
+        if (this.authService.hasRole(role)) {
+           hasRole =  true;
+        }
+    });*/
+      if (hasRole){
+      return true;
+    } else {
       swal.fire('Acceso denegado', `${this.authService.empleado.nombre} no tiene acceso a este recurso!`, 'warning');
       // retornar a la pagina empleados
       this.router.navigate(['/directivas']);
       return false;
+      /*if (this.authService.hasRole(roles)){
+        return true;
+      }*/
+    }
+
   }
 }

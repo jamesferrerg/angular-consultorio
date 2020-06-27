@@ -6,6 +6,7 @@ import swal from 'sweetalert2';
 import { tap, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from './auth.service';
+import { ModalHabService } from './modal-habilitar/modal-hab.service';
 
 @Component({
   selector: 'app-empleados',
@@ -19,7 +20,7 @@ export class EmpleadosComponent implements OnInit {
   empleadoSeleccionado: Empleado;
 
   constructor(public empleadoService: EmpleadoService, 
-    private modalService: ModalService,
+    private modalService: ModalService, private modalHabService: ModalHabService,
     public authService: AuthService,
     private activatedRoute: ActivatedRoute) { }
 
@@ -99,6 +100,11 @@ export class EmpleadosComponent implements OnInit {
   abrirModal(empleado: Empleado){
     this.empleadoSeleccionado = empleado;
     this.modalService.abrirModal();
+  }
+
+  abrirModalHab(empleado: Empleado){
+    this.empleadoSeleccionado = empleado;
+    this.modalHabService.abrirModalHab();
   }
 
 }

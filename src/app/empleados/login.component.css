@@ -8,8 +8,9 @@ body {
     overflow-x: hidden;
     /*background: #007bff;
     background: linear-gradient(to right, #0a205e, #8498b0);*/
-    background: url(../../images/consultorio-login.png);
+    background: url(../../images/sala-espera.jpeg);
     background-size: cover;
+    background-position: center;
     display: grid;
     position: fixed;
     width: -webkit-fill-available;

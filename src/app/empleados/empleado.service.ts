@@ -21,6 +21,7 @@ export class EmpleadoService {
 
   private urlEndPoint:string = 'http://localhost:8080/api/empleados';
   private ulrEndPointChange:string = 'http://localhost:8080/api/cambiar-datos';
+  private urlEndPointState:string = 'http://localhost:8080/api/habilitar';
 
   /* quita por el interceptor
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});*/
@@ -245,6 +246,23 @@ export class EmpleadoService {
   
   updateInfo(empleado: Empleado): Observable<any>{
     return this.http.put<any>(`${this.ulrEndPointChange}/${empleado.idEmpleado}`, empleado).pipe(
+      catchError(e => {
+
+        if (e.status == 400) {
+          return throwError(e);
+        }
+
+        if (e.error.mensaje){
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+  updateHabilitar(empleado: Empleado): Observable<any>{
+    console.log('**id: ' + empleado.idEmpleado);
+    return this.http.put<any>(`${this.urlEndPointState}/${empleado.idEmpleado}`, empleado).pipe(
       catchError(e => {
 
         if (e.status == 400) {

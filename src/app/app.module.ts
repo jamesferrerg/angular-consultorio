@@ -43,6 +43,7 @@ import { DetallePacienteComponent } from './pacientes/detalle-paciente/detalle-p
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OrderModule } from 'ngx-order-pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ModalHabilitarComponent } from './empleados/modal-habilitar/modal-habilitar.component';
 
 registerLocaleData(localeES, 'es-CO');
 
@@ -51,16 +52,16 @@ const routes: Routes = [
   {path: 'directivas', component: DirectivaComponent},
   {path: 'empleados', component: EmpleadosComponent},
   {path: 'empleados/page/:page', component: EmpleadosComponent},
-  {path: 'empleados/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
-  {path: 'empleados/form/:idEmpleado', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'empleados/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path: 'empleados/form/:idEmpleado', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path: 'login', component: LoginComponent},
-  {path: 'perfiles', component: EmpleadoRolComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
-  {path: 'perfiles/form', component: RolFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'perfiles', component: EmpleadoRolComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path: 'perfiles/form', component: RolFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path: 'micuenta', component: MiCuentaComponent},
   {path: 'cambiar-datos', component: CambiarDatosComponent},
   {path: 'pacientes', component: PacientesComponent},
-  {path: 'pacientes/paciente-form', component: PacienteFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
-  {path: 'pacientes/paciente-form/:idPaciente', component: PacienteFormComponent}
+  {path: 'pacientes/paciente-form', component: PacienteFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_USER']}},
+  {path: 'pacientes/paciente-form/:idPaciente', component: PacienteFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_USER']}}
 ]
 
 @NgModule({
@@ -81,7 +82,8 @@ const routes: Routes = [
     CompareValidatorDirective,
     PacientesComponent,
     PacienteFormComponent,
-    DetallePacienteComponent
+    DetallePacienteComponent,
+    ModalHabilitarComponent
   ],
   imports: [
     BrowserModule,

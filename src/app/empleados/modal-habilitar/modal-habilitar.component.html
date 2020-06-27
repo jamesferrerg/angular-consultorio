@@ -1,0 +1,33 @@
+<div class="abrir-modal animacion fadeIn" *ngIf="modalHabService.modalHab">
+    <div class="modal" tabindex="-1" role="dialog" style="display: block;">
+        <div class="modal-dialog modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" *ngIf="!empleado.habilitado">Habilitar</h5>
+                    <h5 class="modal-title" *ngIf="empleado.habilitado">Deshabilitar</h5>
+                    <button (click)="cerrarModalHab()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div>
+
+                            <div class="col-sm">
+                                <div *ngIf="empleado" class="list-group mb-3">
+                                    <p class="text-justify" *ngIf="empleado.habilitado">¿Desea deshabilitar a <strong class="text-danger">{{empleado.nombre + ' ' + empleado.apellido}}</strong>, para que no pueda ingresar a la plataforma web del Consultorio Nuevas Sonrisas? </p>
+                                    <p class="text-justify" *ngIf="!empleado.habilitado">¿Desea habilitar a <strong class="text-danger">{{empleado.nombre + ' ' + empleado.apellido}}</strong> para que pueda ingresar a la plataforma web del Consultorio Nuevas Sonrisas? </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button (click)="cerrarModalHab()" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateHabilitar()">Si, guardar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
