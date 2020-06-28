@@ -1,6 +1,7 @@
 <ul class="container alert alert-danger pl-4" *ngIf="errores?.length > 0">
     <li *ngFor="let itemErr of errores"> {{itemErr}} </li>
 </ul>
+
 <div class="container card bg-white mt-3">
     <div class="card-header"> {{titulo}} </div>
     <div class="card-body">
@@ -15,7 +16,7 @@
                 <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
                 <div class="col-sm-6">
                     <!-- Se asigna una variable con # -->
-                    <input type="text" class="form-control" [(ngModel)]="empleado.nombre" name="nombre" #nombre="ngModel">
+                    <input type="text" class="form-control" [(ngModel)]="empleado.nombre" name="nombre" #nombre="ngModel" placeholder="Primer y segundo nombre">
                     <!-- required minlength="3" -->
                     <!-- dirty: a medida que se esta escribiendo muestra el mensaje de error. touched: muestra cuando se sale del input-->
                     <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
@@ -32,7 +33,7 @@
             <div class="form-group row">
                 <label for="apellido" class="col-form-label col-sm-2">Apellido</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="empleado.apellido" name="apellido" #apellido="ngModel">
+                    <input type="text" class="form-control" [(ngModel)]="empleado.apellido" name="apellido" #apellido="ngModel" placeholder="Primer y segundo apellido">
                     <!-- required -->
                     <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
                         <div *ngIf="apellido.errors.required">
@@ -56,7 +57,7 @@
             <div class="form-group row">
                 <label for="numeroIdentificacion" class="col-form-label col-sm-2">No. identificación</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="empleado.numeroIdentificacion" name="numeroIdentificacion" #numeroIdentificacion="ngModel">
+                    <input type="text" class="form-control" [(ngModel)]="empleado.numeroIdentificacion" name="numeroIdentificacion" #numeroIdentificacion="ngModel" placeholder="El número no debe estar registrado, debe ser unico">
                     <!-- required -->
                     <div class="alert alert-danger" *ngIf="numeroIdentificacion.invalid && (numeroIdentificacion.dirty || numeroIdentificacion.touched)">
                         <div *ngIf="numeroIdentificacion.errors.required">

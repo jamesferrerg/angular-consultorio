@@ -47,6 +47,7 @@
                     <div class="col-md-3 mr-sm-5 mb-1">
                         <label for="numeroIdentificacion" class="col-form-label">Número de identificación</label>
                         <input type="text" class="form-control" [(ngModel)]="paciente.numeroIdentificacion" name="numeroIdentificacion" #numeroIdentificacion="ngModel" placeholder="No ingresar puntos">
+                        <small id="duplicidad" class="form-text text-muted">El número de identificación debe ser unico y no debe estar registrado.</small>
                         <div class="alert alert-danger" *ngIf="numeroIdentificacion.invalid && (numeroIdentificacion.dirty || numeroIdentificacion.touched)">
                             <div *ngIf="numeroIdentificacion.errors.required">
                                 El número de identificación es requerido
@@ -106,9 +107,15 @@
                         <label for="direccion" class="col-form-label">Ocupación</label>
                         <input type="text" class="form-control" [(ngModel)]="paciente.ocupacion" name="direccion">
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="col-md-3 mr-sm-5 mb-1">
                         <label for="barrio" class="col-form-label">EPS/aseguradora</label>
-                        <input type="text" class="form-control" [(ngModel)]="paciente.aseguradora" name="barrio">
+                        <input type="text" class="form-control" [(ngModel)]="paciente.aseguradora" name="aseguradora">
+                    </div>
+                    <div class="col-md-6 mr-sm-5 mb-1">
+                        <label for="barrio" class="col-form-label">Observación</label>
+                        <textarea class="form-control" [(ngModel)]="paciente.observacion" name="observacion"></textarea>
                     </div>
                 </div>
             </fieldset><br>

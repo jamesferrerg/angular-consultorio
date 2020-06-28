@@ -21,6 +21,7 @@ export class Paciente{
     sexo: Sexo;
     departamento: Departamento;
     municipio: Municipio;
+    observacion: string;
 
     term: string;
 }

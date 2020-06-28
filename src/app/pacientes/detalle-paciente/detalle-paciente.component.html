@@ -11,7 +11,6 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-
                             <div class="col-sm">
                                 <ul *ngIf="paciente" class="list-group mb-3">
                                     <li class="list-group-item list-group-item-primary">Nombre: {{paciente.nombre}}</li>
@@ -35,6 +34,9 @@
                                     <li class="list-group-item">Barrio: {{paciente.barrio}}</li>
                                 </ul>
                             </div>
+                        </div>
+                        <div class="col-sm alert alert-dismissible alert-info">
+                            <p>Observación: {{paciente.observacion}}</p>
                         </div>
                     </div>
                 </div>

@@ -22,6 +22,7 @@ export class EmpleadoService {
   private urlEndPoint:string = 'http://localhost:8080/api/empleados';
   private ulrEndPointChange:string = 'http://localhost:8080/api/cambiar-datos';
   private urlEndPointState:string = 'http://localhost:8080/api/habilitar';
+  duplicidad: string;
 
   /* quita por el interceptor
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});*/
@@ -72,12 +73,12 @@ export class EmpleadoService {
       /* Tap: para poder realizar alguna tarea con los valores o items, es decir realizar 
       alguna tarea, proceso pero sin modificar lo valores en si mismo. Ej: guardar algo o 
       registar estos datos en log o asignar a un atributo de la clase */
-      tap((response: any) => {
+      /*tap((response: any) => {
         // se realiza el cast response as Empleado[]
         (response.content as Empleado[]).forEach( empleado => {
           console.log(empleado.nombre);
         });
-      }),
+      }),*/
       /* map permite convertir a un listado de empleados --- se toma response que 
       viene en un formato json y se convierte en un listado o arreglode empleados*/
       map ((response: any) => {
