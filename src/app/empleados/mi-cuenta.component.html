@@ -25,6 +25,19 @@
                     </div>
                 </div>
             </div>
+            <div class="input-group" *ngIf="authService.hasRole">
+                <div class="custom-file">
+                    <!-- onChange=cuando cambia (cuando se selcciona un archivo) -->
+                    <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                    <label class="custom-file-label" for="inputGroupFile04">Seleccione su foto</label>
+                </div>
+                <div class="input-group-append">
+                    <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-warning" type="button" id="inputGroupFileAddon04">Subir</button>
+                </div>
+            </div>
+            <div class="my-2">
+                <small class="text-muted ml-2">Para ver los cambios de la foto luego de dar click en subir, cierre e inicie sesión</small>
+            </div>
         </div>
     </div>
 </div>

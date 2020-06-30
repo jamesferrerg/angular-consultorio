@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { formatDate, DatePipe} from '@angular/common';
 import { Empleado } from './empleado';
 import { TipoIdentificacion } from './tipoIdentificacion';
@@ -22,7 +22,7 @@ export class EmpleadoService {
   private urlEndPoint:string = 'http://localhost:8080/api/empleados';
   private ulrEndPointChange:string = 'http://localhost:8080/api/cambiar-datos';
   private urlEndPointState:string = 'http://localhost:8080/api/habilitar';
-  duplicidad: string;
+
 
   /* quita por el interceptor
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});*/

@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent{
-    title: string = 'App iniciando';
+    title: string = 'C. Odont. Nuevas Sonrisas';
 
     constructor(public authService: AuthService, private router: Router){}
 

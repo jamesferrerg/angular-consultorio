@@ -25,6 +25,7 @@ export class PacientesComponent implements OnInit {
   faSearch = faSearch;
   pacienteSeleccionado: Paciente;
   
+  // paginacion, ordenar y buscar https://ciphertrick.com/search-sort-pagination-angular/
   term: string;
   order: string = 'nombre';
   reverse: boolean = false;
