@@ -1,0 +1,133 @@
+<app-login *ngIf="mostrarLogin == false"></app-login>
+<app-header *ngIf="authService.isAuthenticated() && mostrarLogin == true"></app-header>
+<div class="wrap mg-4">
+    <router-outlet *ngIf="authService.isAuthenticated() && mostrarLogin == true"></router-outlet>
+</div>
+<app-footer *ngIf="authService.isAuthenticated() && mostrarLogin == true"></app-footer>
+
+<!-- *ngIf="hiddenHome == true && !authService.isAuthenticated()" -->
+<div *ngIf="hiddenHome == true && !authService.isAuthenticated()">
+    <!-- top high * bar1 -->
+    <div id="topHigh" class="d-none d-lg-flex align-items-center fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <fa-icon [icon]="farClock" class="mr-2 fa-lg"></fa-icon>Lunes a Viernes 8am a 8pm, Sabados 8am a 4pm
+            </div>
+            <div class="d-flex align-items-center">
+                <fa-icon [icon]="faPhone" class="mr-2"></fa-icon> Llamanos al 350 8559120
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex d-flex align-items-center">
+            <a href="#" class="logo mr-auto">Logo<img></a>
+            <nav class="d-none d-lg-block nav-menu">
+                <ul>
+                    <li class="active">
+                        <a [routerLink]="['/home']">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="#acerca">Acerca</a>
+                    </li>
+                    <li>
+                        <a href="#servicios">Servicios</a>
+                    </li>
+                    <li>
+                        <a href="#contactenos">Contactenos</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/login']" (click)="setMostrarLogin()">Inicio de sesión</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- Carrusel -->
+    <section id="publicidad">
+        <div id="pubCarrusel" class="carousel slide carousel-fade" data-ride="carousel">
+            <ol id="publicidad-carrusel-indicador" class="carousel-indicators">
+                <li data-target="#pubCarrusel" data-slide-to="0" class="active"></li>
+                <li data-target="#pubCarrusel" data-slide-to="1"></li>
+                <li data-target="#pubCarrusel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Imagen 1 -->
+                <div class="carousel-item active imagen-1">
+                    <div class="container">
+                        <h2>Bienvenido <span>Nuevas Sonrisas</span></h2>
+                        <p>Su consultorio odontologico quien le dara una sonrisa</p>
+                        <a href="#acerca" class="btn-get-started scrollto">Leer más</a>
+                    </div>
+                </div>
+                <!-- Imagen 2 -->
+                <div class="carousel-item imagen-2">
+                    <div class="container">
+                        <h2>Cotize <span>con nosotros</span></h2>
+                        <p>Pregunte por nuestros descuentos</p>
+                        <a href="#acerca" class="btn-get-started scrollto">Leer más</a>
+                    </div>
+                </div>
+                <!-- Imagen 3 -->
+                <div class="carousel-item imagen-3">
+                    <div class="container">
+                        <h2>Nuestras <span>instalaciones</span></h2>
+                        <p>Cuenta con todos los estandares o protocolos para atenderlo durante esta pandemia del covid-19</p>
+                        <a href="#acerca" class="btn-get-started scrollto">Leer más</a>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#pubCarrusel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"><fa-icon [icon]="faAngleLeft"></fa-icon></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+
+                <a class="carousel-control-next" href="#pubCarrusel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"><fa-icon [icon]="faAngleRight"></fa-icon></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main id="main">
+        <section class="services">
+            <div class="container" data-aos="fade-up">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon"><i class="icofont-heart-beat"></i></div>
+                            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+                            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+                            <div class="icon"><i class="icofont-drug"></i></div>
+                            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+                            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+                            <div class="icon"><i class="icofont-thermometer-alt"></i></div>
+                            <h4 class="title"><a href="">Magni Dolores</a></h4>
+                            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+                            <div class="icon"><i class="icofont-dna-alt-1"></i></div>
+                            <h4 class="title"><a href="">Nemo Enim</a></h4>
+                            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>

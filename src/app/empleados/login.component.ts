@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
     this._alertClosed.pipe(
       debounceTime(5000)
     ).subscribe(() => this.errores = '');
-    
     if (this.authService.isAuthenticated()){
       swal.fire('Login', `Hola ${this.authService.empleado.nombre} ya esta autenticado!`, 'info');
       this.router.navigate(['/directivas']);
@@ -42,8 +41,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.empleado).subscribe(response => {
-      console.log(response);
-
+      //console.log(response);
       this.authService.guardarUsuario(response.access_token);
       this.authService.guardarToken(response.access_token);
 

@@ -44,11 +44,13 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OrderModule } from 'ngx-order-pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ModalHabilitarComponent } from './empleados/modal-habilitar/modal-habilitar.component';
+import { HomeComponent } from './home/home.component';
 
 registerLocaleData(localeES, 'es-CO');
 
 const routes: Routes = [
-  {path: '', redirectTo: '/directivas', pathMatch: 'full'},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
   {path: 'directivas', component: DirectivaComponent},
   {path: 'empleados', component: EmpleadosComponent},
   {path: 'empleados/page/:page', component: EmpleadosComponent},
@@ -83,7 +85,8 @@ const routes: Routes = [
     PacientesComponent,
     PacienteFormComponent,
     DetallePacienteComponent,
-    ModalHabilitarComponent
+    ModalHabilitarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
