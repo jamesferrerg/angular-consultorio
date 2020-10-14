@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 
 export class FooterComponent {
     autor: any = {nombre: 'James Ferrer', apellido: 'Gomez Valverde', correo: 'jamesjfgv@gmail.com'};
+    anio: number;
+
+    constructor() {
+        this.anio = new Date().getFullYear();
+       }
 }

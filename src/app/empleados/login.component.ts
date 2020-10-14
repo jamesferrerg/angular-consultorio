@@ -17,9 +17,11 @@ export class LoginComponent implements OnInit {
   empleado: Empleado;
   public errores: string = '';
   private _alertClosed = new Subject<string>();
+  anio: number;
 
   constructor(private authService: AuthService, private router: Router) {
     this.empleado = new Empleado();
+    this.anio = new Date().getFullYear();
    }
 
   ngOnInit() {

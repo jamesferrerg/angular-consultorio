@@ -35,7 +35,7 @@ export class ModalHabilitarComponent implements OnInit {
 
   updateHabilitar(): void{
     this.empleadoService.updateHabilitar(this.empleado).subscribe(empleado => {
-      if (this.empleado.habilitado === true){
+      if (this.empleado.habilitado == true){
         this.empleado.habilitado = false;
       } else {
         this.empleado.habilitado = true;

@@ -1,9 +1,9 @@
-<app-home></app-home>
-<!-- <app-login *ngIf="!authService.isAuthenticated()"></app-login>
-<app-header *ngIf="authService.isAuthenticated()"></app-header>
+<app-home *ngIf="!showHome && !authService.isAuthenticated()"></app-home>
+<app-login *ngIf="!authService.isAuthenticated() && showHome"></app-login>
+<app-header *ngIf="authService.isAuthenticated() && !showHome"></app-header>
 
-<div class="wrap mg-4"> -->
-<!-- directiva donde se van a renderizar y mostar el contenido de cada ruta -->
-<!--  <router-outlet *ngIf="authService.isAuthenticated()"></router-outlet>
+<div class="wrap mg-4" *ngIf="authService.isAuthenticated() && !showHome">
+    <!-- directiva donde se van a renderizar y mostar el contenido de cada ruta -->
+    <router-outlet *ngIf="authService.isAuthenticated() && !showHome"></router-outlet>
 </div>
-<app-footer *ngIf="authService.isAuthenticated()"></app-footer> -->
+<app-footer *ngIf="authService.isAuthenticated() && !showHome"></app-footer>

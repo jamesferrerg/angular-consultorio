@@ -262,7 +262,7 @@ export class EmpleadoService {
   }
 
   updateHabilitar(empleado: Empleado): Observable<any>{
-    console.log('**id: ' + empleado.idEmpleado);
+    //console.log('**id: ' + empleado.idEmpleado);
     return this.http.put<any>(`${this.urlEndPointState}/${empleado.idEmpleado}`, empleado).pipe(
       catchError(e => {
 

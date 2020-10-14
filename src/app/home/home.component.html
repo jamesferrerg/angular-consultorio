@@ -1,19 +1,19 @@
-<app-login *ngIf="mostrarLogin == false"></app-login>
+<!-- <app-login *ngIf="mostrarLogin == false"></app-login>
 <app-header *ngIf="authService.isAuthenticated() && mostrarLogin == true"></app-header>
 <div class="wrap mg-4">
     <router-outlet *ngIf="authService.isAuthenticated() && mostrarLogin == true"></router-outlet>
 </div>
-<app-footer *ngIf="authService.isAuthenticated() && mostrarLogin == true"></app-footer>
+<app-footer *ngIf="authService.isAuthenticated() && mostrarLogin == true"></app-footer> -->
 
-<!-- *ngIf="hiddenHome == true && !authService.isAuthenticated()" -->
-<div *ngIf="hiddenHome == true && !authService.isAuthenticated()">
+<!-- *ngIf="hiddenHome == true && !authService.isAuthenticated()"  -->
+<div>
     <!-- top high * bar1 -->
-    <div id="topHigh" class="d-none d-lg-flex align-items-center fixed-top">
-        <div class="container d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center">
+    <div id="topHigh" class="d-none d-lg-flex align-items -center fixed-top">
+        <div class="container d-flex align-items -center justify-content-between py-2">
+            <div class="d-flex align-items -center">
                 <fa-icon [icon]="farClock" class="mr-2 fa-lg"></fa-icon>Lunes a Viernes 8am a 8pm, Sabados 8am a 4pm
             </div>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items -center">
                 <fa-icon [icon]="faPhone" class="mr-2"></fa-icon> Llamanos al 350 8559120
             </div>
         </div>
@@ -21,26 +21,28 @@
 
     <!-- Header -->
     <header id="header" class="fixed-top">
-        <div class="container d-flex d-flex align-items-center">
-            <a href="#" class="logo mr-auto">Logo<img></a>
-            <nav class="d-none d-lg-block nav-menu">
-                <ul>
-                    <li class="active">
-                        <a [routerLink]="['/home']">Inicio</a>
-                    </li>
-                    <li>
-                        <a href="#acerca">Acerca</a>
-                    </li>
-                    <li>
-                        <a href="#servicios">Servicios</a>
-                    </li>
-                    <li>
-                        <a href="#contactenos">Contactenos</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/login']" (click)="setMostrarLogin()">Inicio de sesión</a>
-                    </li>
-                </ul>
+        <div class="container align-items -center">
+            <nav class="navbar navbar-expand-lg navbar-light d-flex nav-menu">
+                <a class="navbar-brand" href="#">LOGO</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item" routerLinkActive="active">
+                            <a class="nav-link" href="http://localhost:4200/home#publicidad">Inicio</a>
+                        </li>
+                        <li class="nav-item" routerLinkActive="active">
+                            <a class="nav-link" href="http://localhost:4200/home#acerca">Acerca</a>
+                        </li>
+                        <li class="nav-item" routerLinkActive="active">
+                            <a class="nav-link" href="http://localhost:4200/home#contact">Contactenos</a>
+                        </li>
+                        <li class="nav-item" routerLinkActive="active">
+                            <a class="nav-link" [routerLink]="['/login']" (click)="setMostrarLogin()">Inicio de sesión</a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
 
         </div>
@@ -56,7 +58,7 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <!-- Imagen 1 -->
-                <div class="carousel-item active imagen-1">
+                <div class="carousel-item  active imagen-1">
                     <div class="container">
                         <h2>Bienvenido <span>Nuevas Sonrisas</span></h2>
                         <p>Su consultorio odontologico quien le dara una sonrisa</p>
@@ -64,7 +66,7 @@
                     </div>
                 </div>
                 <!-- Imagen 2 -->
-                <div class="carousel-item imagen-2">
+                <div class="carousel-item  imagen-2">
                     <div class="container">
                         <h2>Cotize <span>con nosotros</span></h2>
                         <p>Pregunte por nuestros descuentos</p>
@@ -72,7 +74,7 @@
                     </div>
                 </div>
                 <!-- Imagen 3 -->
-                <div class="carousel-item imagen-3">
+                <div class="carousel-item  imagen-3">
                     <div class="container">
                         <h2>Nuestras <span>instalaciones</span></h2>
                         <p>Cuenta con todos los estandares o protocolos para atenderlo durante esta pandemia del covid-19</p>
@@ -93,41 +95,199 @@
     </section>
 
     <main id="main">
-        <section class="services">
+        <section class="services bg-light" id="services">
             <div class="container" data-aos="fade-up">
+
                 <div class="row">
-                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-                            <div class="icon"><i class="icofont-heart-beat"></i></div>
-                            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-                            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                    <div class="col-md-6 col-lg-3 d-flex align-items -stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="200" data-aos-duration="750">
+                            <div class="icon">
+                                <fa-icon [icon]="faGrinBeam" class="fa-3x"></fa-icon>
+                            </div>
+                            <h4 class="title"><a href="">Diseño de sonrisa</a></h4>
+                            <p class="description">Una descripcion de lo ques diseño de sonrisa</p>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-                            <div class="icon"><i class="icofont-drug"></i></div>
-                            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-                            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                        <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-                            <div class="icon"><i class="icofont-thermometer-alt"></i></div>
-                            <h4 class="title"><a href="">Magni Dolores</a></h4>
-                            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                    <div class="col-md-6 col-lg-3 d-flex align-items -stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
+                            <div class="icon">
+                                <fa-icon [icon]="faTooth" class="fa-3x"></fa-icon>
+                            </div>
+                            <h4 class="title"><a href="">Implante</a></h4>
+                            <p class="description">Una descripcion de lo que es implante</p>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                        <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
-                            <div class="icon"><i class="icofont-dna-alt-1"></i></div>
-                            <h4 class="title"><a href="">Nemo Enim</a></h4>
-                            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                    <div class="col-md-6 col-lg-3 d-flex align-items -stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1500">
+                            <div class="icon">
+                                <fa-icon [icon]="faTeeth" class="fa-3x"></fa-icon>
+                            </div>
+                            <h4 class="title"><a href="">Ortodoncia</a></h4>
+                            <p class="description">Una descripcion de lo que es ortodoncia</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items -stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="800" data-aos-duration="2000">
+                            <div class="icon">
+                                <fa-icon [icon]="faPlusCircle" class="fa-3x"></fa-icon>
+                            </div>
+                            <h4 class="title"><a href="">Otros servicios</a></h4>
+                            <p class="description">Mencionar cuales son esos servicios</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- +++++ Urgencia +++++ -->
+        <section id="urgencia" class="urgencia">
+            <div class="container" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="text-center">
+                    <h3>¿Una emergencia? ¿Ahora?</h3>
+                    <p> Su dolor no espera solo descespera, nosotros lo atendemos.</p>
+                    <a class="urgencia-btn scrollto">Escribenos a nuestro WhatsApp o llamanos</a>
+                    <div>
+                        <fa-icon [icon]="faWhatsapp" class="fa-3x align-middle"></fa-icon><span class="pl-3 h5">350 8559120</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- +++++ Acerca +++++ -->
+        <section id="acerca" class="acerca">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Acerca de Nuevas Sonrisas</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi
+                        quidem hic quas.</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <img src="../../assets/img/entradaC-02.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
+                        <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+                        <p class="font-italic">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </p>
+                        <ul>
+                            <li><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                            <li><i class="icofont-check-circled"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+                            <li><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+                        </ul>
+                        <p>
+                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                            id est laborum
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ++++ Todos los servicios ++++ -->
+        <section id="all-services" class="all-services all-services">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Todos nuestros servicios</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi
+                        quidem hic quas.</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="icon"><i class="icofont-heart-beat"></i></div>
+                        <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="icon"><i class="icofont-drug"></i></div>
+                        <h4 class="title"><a href="">Dolor Sitema </a></h4>
+                        <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="icon"><i class="icofont-dna-alt-2"></i></div>
+                        <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+                        <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="icon"><i class="icofont-heartbeat"></i></div>
+                        <h4 class="title"><a href="">Magni Dolores</a></h4>
+                        <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="icon"><i class="icofont-disabled"></i></div>
+                        <h4 class="title"><a href="">Nemo Enim</a></h4>
+                        <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="icon"><i class="icofont-autism"></i></div>
+                        <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
+                        <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- +++++ Contactenos +++++ -->
+        <section class="contact" id="contact">
+            <div class="container">
+
+                <div class="section-title">
+                    <h2>Contactenos</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi
+                        quidem hic quas.</p>
+                </div>
+
+            </div>
+
+            <div>
+                <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d248.50151485480114!2d-74.03034720346794!3d4.765765689774152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sco!4v1594079276451!5m2!1ses!2sco"
+                    frameborder="0" allowfullscreen></iframe>
+            </div>
+        </section>
+        <!-- +++++ Footer +++++ -->
+        <footer id="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="footer-info">
+                                <h3>Consultorio odontológico Nuevas Sonrisas</h3>
+                                <p>
+                                    Calle 187 <br> Bogotá, Colombia<br><br>
+                                    <strong>Teléfono mobil:</strong> 350 8559120<br>
+                                </p>
+                                <div class="social-links mt-1">
+                                    <a href="https://www.instagram.com/nuevas.sonrisas/" target="_blank" class="facebook mx-2">
+                                        <fa-icon [icon]="faFacebookSquare" class="fa-2x"></fa-icon>
+                                    </a>
+                                    <a href="https://www.instagram.com/nuevas.sonrisas/" target="_blank" class="instagram">
+                                        <fa-icon [icon]="faInstagramSquare" class="fa-2x"></fa-icon>
+                                    </a>
+                                    <a href="http://localhost:4200/home#urgencia" class="whatsapp">
+                                        <fa-icon [icon]="faWhatsappSquare" class="fa-2x mx-2"></fa-icon>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-6 footer-links">
+                            <h4>Mapa del sitio</h4>
+                            <ul>
+                                <li>
+                                    <fa-icon [icon]="faCheck" class="fa-xs mr-2"></fa-icon><a href="http://localhost:4200/home#publicidad">Inicio</a></li>
+                                <li>
+                                    <fa-icon [icon]="faCheck" class="fa-xs mr-2"></fa-icon><a href="http://localhost:4200/home#acerca">Acerca</a></li>
+                                <li>
+                                    <fa-icon [icon]="faCheck" class="fa-xs mr-2"></fa-icon><a href="http://localhost:4200/home#all-services">Servicios</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </main>
 </div>

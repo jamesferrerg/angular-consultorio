@@ -56,6 +56,7 @@ const routes: Routes = [
   {path: 'empleados/page/:page', component: EmpleadosComponent},
   {path: 'empleados/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path: 'empleados/form/:idEmpleado', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  //{path: 'habilitar/:idEmpleado', component: CambiarDatosComponent},
   {path: 'login', component: LoginComponent},
   {path: 'perfiles', component: EmpleadoRolComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path: 'perfiles/form', component: RolFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
