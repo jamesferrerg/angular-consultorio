@@ -45,6 +45,8 @@ import { OrderModule } from 'ngx-order-pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ModalHabilitarComponent } from './empleados/modal-habilitar/modal-habilitar.component';
 import { HomeComponent } from './home/home.component';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { CommonModule } from '@angular/common';
 
 registerLocaleData(localeES, 'es-CO');
 
@@ -105,7 +107,9 @@ const routes: Routes = [
     NgbModule,
     Ng2SearchPipeModule,
     OrderModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    RecaptchaModule, RecaptchaFormsModule,
+    CommonModule,
   ],
   providers: [EmpleadoService,
     { provide: LOCALE_ID, useValue: 'es-CO' },

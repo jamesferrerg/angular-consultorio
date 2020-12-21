@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Empleado } from './empleado';
 import swal from 'sweetalert2';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
+
+export interface FormModel {
+  captcha?: string;
+}
 
 @Component({
   selector: 'app-login',
@@ -18,8 +22,9 @@ export class LoginComponent implements OnInit {
   public errores: string = '';
   private _alertClosed = new Subject<string>();
   anio: number;
+  public formModel: FormModel = {};
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private _renderer: Renderer2) {
     this.empleado = new Empleado();
     this.anio = new Date().getFullYear();
    }
@@ -33,6 +38,13 @@ export class LoginComponent implements OnInit {
       swal.fire('Login', `Hola ${this.authService.empleado.nombre} ya esta autenticado!`, 'info');
       this.router.navigate(['/directivas']);
     }
+
+    // agregar script de recaptcha
+    let script = this._renderer.createElement('script');
+    script.defer = true;
+    script.async = true;
+    script.src = "https://www.google.com/recaptcha/api.js";
+    this._renderer.appendChild(document.body, script);
   }
 
   login(): void{

@@ -6,7 +6,7 @@
                     <div class="card card-signin my-5">
                         <div class="card-body">
                             <h5 class="card-title text-center">{{titulo}}</h5>
-                            <form class="form-signin" method="post">
+                            <form class="form-signin" method="post" #captchaProtectedForm="ngForm">
                                 <div class="form-label-group">
                                     <input [(ngModel)]="empleado.username" type="text" id="username" name="username" class="form-control" placeholder="Nombre de usuario" required autofocus>
                                     <label for="username">Nombre de usuario</label>
@@ -16,10 +16,15 @@
                                     <input [(ngModel)]="empleado.password" type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
                                     <label for="password">Contraseña</label>
                                 </div>
-
-                                <input (click)="login()" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="Ingresar">
+                                <div class="my-3">
+                                    <re-captcha [(ngModel)]="formModel.captcha" name="captcha" siteKey="6LdH9MUUAAAAAOZLBGPUYWDOkwkYDTLH7KLPRSF4" #captchaControl="ngModel" required></re-captcha>
+                                    <div [hidden]="captchaControl.valid" class="text-danger">Captcha debe ser resuelto</div>
+                                    <div [hidden]="!captchaControl.valid" class="text-success">Captcha valido</div>
+                                </div>
+                                <input (click)="login()" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="Ingresar" [disabled]="!formModel.captcha">
                                 <br>
                             </form>
+
                             <div class="text-center">
                                 <a class="small" href="/home">Volver a la pagina principal</a>
                             </div>
