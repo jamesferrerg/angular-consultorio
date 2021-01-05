@@ -23,7 +23,7 @@
     <header id="header" class="fixed-top">
         <div class="container align-items -center">
             <nav class="navbar navbar-expand-lg navbar-light d-flex nav-menu">
-                <a class="navbar-brand" href="#">LOGO</a>
+                <!--<a class="navbar-brand" href="#">LOGO</a>-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -33,10 +33,10 @@
                             <a class="nav-link" href="http://localhost:4200/home#publicidad">Inicio</a>
                         </li>
                         <li class="nav-item" routerLinkActive="active">
-                            <a class="nav-link" href="http://localhost:4200/home#acerca">Acerca</a>
+                            <a class="nav-link" href="http://localhost/home#acerca">Acerca</a>
                         </li>
                         <li class="nav-item" routerLinkActive="active">
-                            <a class="nav-link" href="http://localhost:4200/home#contact">Contactenos</a>
+                            <a class="nav-link" routerLink="/home#contact">Contactenos</a>
                         </li>
                         <li class="nav-item" routerLinkActive="active">
                             <a class="nav-link" [routerLink]="['/login']" (click)="setMostrarLogin()">Inicio de sesión</a>
@@ -105,7 +105,7 @@
                                 <fa-icon [icon]="faGrinBeam" class="fa-3x"></fa-icon>
                             </div>
                             <h4 class="title"><a href="">Diseño de sonrisa</a></h4>
-                            <p class="description">Una descripcion de lo ques diseño de sonrisa</p>
+                            <p class="description text-justify">Si lo que estás buscando es corregir los defectos estéticos y odontológicos, una de las formas más armoniosas para comenzar es realizando un diseño de sonrisa.</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 d-flex align-items -stretch mb-5 mb-lg-0">
@@ -114,7 +114,7 @@
                                 <fa-icon [icon]="faTooth" class="fa-3x"></fa-icon>
                             </div>
                             <h4 class="title"><a href="">Implante</a></h4>
-                            <p class="description">Una descripcion de lo que es implante</p>
+                            <p class="description text-justify">Los implantes son la opción para reconstruir y recuperar la estética y funcionalidad dental, sean pérdidas totales o parciales.</p>
                         </div>
                     </div>
 
@@ -124,7 +124,7 @@
                                 <fa-icon [icon]="faTeeth" class="fa-3x"></fa-icon>
                             </div>
                             <h4 class="title"><a href="">Ortodoncia</a></h4>
-                            <p class="description">Una descripcion de lo que es ortodoncia</p>
+                            <p class="description text-justify">La ortodoncia por ejemplo, te ofrece recuperar la ubicación perfecta de tus dientes y con ello, tu aspecto dental cambiará favorablemente.</p>
                         </div>
                     </div>
 
@@ -134,7 +134,7 @@
                                 <fa-icon [icon]="faPlusCircle" class="fa-3x"></fa-icon>
                             </div>
                             <h4 class="title"><a href="">Otros servicios</a></h4>
-                            <p class="description">Mencionar cuales son esos servicios</p>
+                            <p class="description text-justify">Odontología general, blanqueamiento dental, endodoncia, periodoncia y maś servicios encontrara en nuestro consultorio.</p>
                         </div>
                     </div>
                 </div>
@@ -159,8 +159,7 @@
 
                 <div class="section-title">
                     <h2>Acerca de Nuevas Sonrisas</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi
-                        quidem hic quas.</p>
+                    <p>En el consultorio Nuevas Sonrisas trabajamos para lograr que tu sonrisa impacte, sea hermosa, tenga un aspecto armónico y simétrico.</p>
                 </div>
 
                 <div class="row">
@@ -168,18 +167,10 @@
                         <img src="../../assets/img/entradaC-02.jpg" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
-                        <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-                        <p class="font-italic">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </p>
-                        <ul>
-                            <li><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                            <li><i class="icofont-check-circled"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                            <li><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                        </ul>
-                        <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                            id est laborum
+                        <p class="text-justify">
+                            Somos un equipo de profesionales de la salud bucal altamente calificados, con amplia experiencia en diversas especialidades como: odontología general, ortodoncia y ortopedia maxilar, periodoncia, endodoncia rehabilitación oral. Nuestro consultorio está
+                            equipado con las mejores herramientas para llevar acabo estos tratamientos. Creemos que el trato cercano y directo es fundamental para el bienestar de nuestros pacientes. Por eso nos esforzamos para que cada momento que compartimos
+                            esté lleno de motivos para sonreír.
                         </p>
                     </div>
                 </div>
@@ -191,40 +182,50 @@
 
                 <div class="section-title">
                     <h2>Todos nuestros servicios</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi
-                        quidem hic quas.</p>
+                    <p>Trabajamos diariamente para reparar, mejorar y resaltar tu diseño de sonrisa logrando una estética dental impactante y perfecta.</p>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="icon"><i class="icofont-heart-beat"></i></div>
-                        <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                        <div class="icon"><i class="icofont-heart-beat"><img src="../../assets/img/implante.png" class="img-servicio"></i></div>
+                        <h4 class="title">IMPLANTES</h4>
+                        <p class="description">Los implantes son la opción para reconstruir y recuperar la estética y funcionalidad dental, sean pérdidas totales o parciales.</p>
                     </div>
                     <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="icon"><i class="icofont-drug"></i></div>
-                        <h4 class="title"><a href="">Dolor Sitema </a></h4>
-                        <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                        <div class="icon"><i class="icofont-drug"><img src="../../assets/img/dentist.svg" class="img-servicio"></i></div>
+                        <h4 class="title">ODONTOLOGÍA GENERAL</h4>
+                        <p class="description">Realizamos programas de prevención y promoción adecuados a las necesidades de cada paciente, fomentando el auto-cuidado, ayudando a mejorar los procesos de higiene oral, lo que nos permite diagnosticar tempranamente enfermedades
+                            y procedimientos dentales.</p>
                     </div>
                     <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="icon"><i class="icofont-dna-alt-2"></i></div>
-                        <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-                        <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        <div class="icon"><i class="icofont-dna-alt-2"><img src="../../assets/img/diseno.jpg" class="img-servicio"></i></div>
+                        <h4 class="title">DISEÑO DE SONRISA</h4>
+                        <p class="description">Si lo que estás buscando es corregir los defectos estéticos y odontológicos, una de las formas más armoniosas para comenzar es realizando un diseño de sonrisa.</p>
                     </div>
                     <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="icon"><i class="icofont-heartbeat"></i></div>
-                        <h4 class="title"><a href="">Magni Dolores</a></h4>
-                        <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                        <div class="icon"><i class="icofont-heartbeat"><img src="../../assets/img/ortodoncia.png" class="img-servicio"></i></div>
+                        <h4 class="title">ORTODONCIA</h4>
+                        <p class="description">La ortodoncia por ejemplo, te ofrece recuperar la ubicación perfecta de tus dientes y con ello, tu aspecto dental cambiará favorablemente.</p>
                     </div>
                     <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="icon"><i class="icofont-disabled"></i></div>
-                        <h4 class="title"><a href="">Nemo Enim</a></h4>
-                        <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                        <div class="icon"><i class="icofont-disabled"><img src="../../assets/img/blanqueamiento.svg" class="img-servicio"></i></div>
+                        <h4 class="title">BLANQUEAMIENTO DENTAL</h4>
+                        <p class="description">Este tratamiento dental y estético tiene como propósito reducir las tonalidades amarillentas de tus piezas dentales, devolviendo el blanco y el brillo de tus dientes.</p>
                     </div>
                     <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="icon"><i class="icofont-autism"></i></div>
-                        <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-                        <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                        <div class="icon"><i class="icofont-autism"><img src="../../assets/img/endodoncia.png" class="img-servicio"></i></div>
+                        <h4 class="title">ENDODONCIA</h4>
+                        <p class="description">La endodoncia es una rama de la medicina dental que se especializa en el tratamiento y manejo de las enfermedades que pueden afectar la pulpa dental o el interior de tus dientes.</p>
+                    </div>
+                    <div class="col-lg-6 col-md-8 icon-box" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="icon"><i class="icofont-autism"><img src="../../assets/img/periodoncia.jpg" class="img-servicio"></i></div>
+                        <h4 class="title">PERIODONCIA</h4>
+                        <p class="description">La periodoncia es la especialidad de la odontología que trata las enfermedades periodontales. Estas enfermedades son aquellas que afectan tus encías. Las más comunes son la periodontitis y la gingivitis.</p>
+                    </div>
+                    <div class="col-lg-6 col-md-8 icon-box" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="icon"><i class="icofont-autism"><img src="../../assets/img/proteccion.png" class="img-servicio"></i></div>
+                        <h4 class="title">PREVENCIÓN Y PROMOCIÓN EN SALUD ORAL</h4>
+                        <p class="description">Prevención y promoción en salud oral</p>
                     </div>
                 </div>
 
@@ -236,8 +237,7 @@
 
                 <div class="section-title">
                     <h2>Contactenos</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi
-                        quidem hic quas.</p>
+                    <p>Puede encontrarnos en la ciudad de Bogotá en la dirección calle 189 # 8C-22 barrio Verbenal, tambien nos puede llamar al celular o número móvil 350 8559120 para que agende su cita.</p>
                 </div>
 
             </div>
@@ -257,13 +257,13 @@
                             <div class="footer-info">
                                 <h3>Consultorio odontológico Nuevas Sonrisas</h3>
                                 <p>
-                                    Calle 187 <br> Bogotá, Colombia<br><br>
+                                    Calle 189 # 8C-22<br> Bogotá, Colombia<br><br>
                                     <strong>Teléfono mobil:</strong> 350 8559120<br>
                                 </p>
                                 <div class="social-links mt-1">
-                                    <a href="https://www.instagram.com/nuevas.sonrisas/" target="_blank" class="facebook mx-2">
+                                    <!--<a href="https://www.instagram.com/nuevas.sonrisas/" target="_blank" class="facebook mx-2">
                                         <fa-icon [icon]="faFacebookSquare" class="fa-2x"></fa-icon>
-                                    </a>
+                                    </a>-->
                                     <a href="https://www.instagram.com/nuevas.sonrisas/" target="_blank" class="instagram">
                                         <fa-icon [icon]="faInstagramSquare" class="fa-2x"></fa-icon>
                                     </a>

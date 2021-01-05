@@ -20,7 +20,7 @@ export class EmpleadosComponent implements OnInit {
   empleadoSeleccionado: Empleado;
 
   constructor(public empleadoService: EmpleadoService, 
-    private modalService: ModalService, private modalHabService: ModalHabService,
+    public modalService: ModalService, private modalHabService: ModalHabService,
     public authService: AuthService,
     private activatedRoute: ActivatedRoute) { }
 

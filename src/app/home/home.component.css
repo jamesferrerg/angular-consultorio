@@ -614,8 +614,8 @@ section {
 }
 
 .all-services .icon i {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     margin-bottom: 20px;
     background: #fff;
     border-radius: 50%;
@@ -662,6 +662,12 @@ section {
 .all-services .description {
     line-height: 24px;
     font-size: 14px;
+}
+
+.img-servicio {
+    max-width: 75%;
+    height: auto;
+    padding-bottom: 4rem;
 }
 
 

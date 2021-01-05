@@ -34,7 +34,7 @@ export class PacientesComponent implements OnInit {
   pageSize: number = 8;
 
   constructor(public authService: AuthService, private activetedRoute: ActivatedRoute, 
-    public pacienteService: PacienteService, private modalService: ModalService,
+    public pacienteService: PacienteService, public modalService: ModalService,
     private config: NgbPaginationConfig) { this.config.boundaryLinks = true; }
 
   ngOnInit(): void {
