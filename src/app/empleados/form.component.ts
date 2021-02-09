@@ -5,6 +5,7 @@ import { Sexo } from './sexo';
 import { EmpleadoService } from './empleado.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
+import { Cargo } from './cargo';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class FormComponent implements OnInit {
   public empleado: Empleado = new Empleado();
   tiposIdentificacion: TipoIdentificacion[];
   sexos: Sexo[];
+  cargos: Cargo[];
   public titulo: string = "Crear empleado";
 
   public errores: string[];
@@ -32,6 +34,8 @@ export class FormComponent implements OnInit {
       this.tiposIdentificacion = tiposIdentificacion);
     this.empleadoService.getSexo().subscribe(sexos =>
       this.sexos = sexos);
+    this.empleadoService.getCargo().subscribe(cargos => 
+      this.cargos = cargos);
   }
 
   cargarEmpleado(): void{
@@ -89,6 +93,14 @@ export class FormComponent implements OnInit {
     }
     // si cualquiera de los dos objetos es null retorna falso
     return sx1 === null || sx2 === null || sx1 === undefined || sx2 === undefined ? false : sx1.idSexo === sx2.idSexo;
+  }
+
+  compararCargo(cg1: Cargo, cg2: Cargo): boolean{
+    if (cg1 === undefined && cg2 === undefined){
+      return true;
+    }
+    // si cualquiera de los dos objetos es null retorna falso
+    return cg1 === null || cg2 === null || cg1 === undefined || cg2 === undefined ? false : cg1.idCargo === cg2.idCargo;
   }
 
 }

@@ -79,6 +79,17 @@
             </div>
 
             <div class="form-group row">
+                <label for="oficio" class="col-form-label col-sm-2">Cargo</label>
+                <div class="col-sm-6">
+                    <!-- comparewith para que aparezca el editar -->
+                    <select [compareWith]="compararCargo" class="form-control" [(ngModel)]="empleado.cargo" name="oficio" style="width: 250px;">
+                        <option [ngValue]="undefined">--- Seleccionar cargo ---</option>
+                        <option *ngFor="let item of cargos" [ngValue]="item">{{item.oficio}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label for="email" class="col-form-label col-sm-2">Email</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" [(ngModel)]="empleado.username" name="username" #username="ngModel">

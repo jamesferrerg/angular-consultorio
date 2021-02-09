@@ -1,5 +1,6 @@
 import { TipoIdentificacion } from './tipoIdentificacion';
 import { Sexo } from './sexo';
+import { Cargo } from './cargo';
 
 export class Empleado {
     idEmpleado: number;
@@ -18,4 +19,5 @@ export class Empleado {
     barrio: string;
     sexo: Sexo;
     habilitado: boolean;
+    cargo: Cargo;
 }

@@ -12,6 +12,7 @@ import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { Sexo } from './sexo';
+import { Cargo } from './cargo';
 
 
 @Injectable({
@@ -241,6 +242,10 @@ export class EmpleadoService {
 
   getSexo(): Observable<Sexo[]>{
     return this.http.get<Sexo[]>(this.urlEndPoint + '/sexos');
+  }
+
+  getCargo(): Observable<Cargo[]>{
+    return this.http.get<Cargo[]>(this.urlEndPoint + '/cargos');
   }
 
   // edicion unicamente de contraseña
