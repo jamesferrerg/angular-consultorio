@@ -1,0 +1,15 @@
+table {
+    width: 100%;
+    overflow: auto;
+    font-size: inherit;
+    white-space: nowrap;
+}
+
+span {
+    font-size: 85%;
+}
+
+.container {
+    padding-right: 0;
+    padding-left: 0;
+}

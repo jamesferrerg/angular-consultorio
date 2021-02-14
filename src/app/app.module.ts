@@ -32,6 +32,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
 import { RolFormComponent } from './empleados/empleado-rol/rol-form.component';
 import { MiCuentaComponent } from './empleados/mi-cuenta.component';
 import { CambiarDatosComponent } from './empleados/cambiar-datos.component';
@@ -47,6 +48,7 @@ import { ModalHabilitarComponent } from './empleados/modal-habilitar/modal-habil
 import { HomeComponent } from './home/home.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { CommonModule } from '@angular/common';
+import { CitasComponent } from './citas/citas.component';
 
 registerLocaleData(localeES, 'es-CO');
 
@@ -66,7 +68,8 @@ const routes: Routes = [
   {path: 'cambiar-datos', component: CambiarDatosComponent},
   {path: 'pacientes', component: PacientesComponent},
   {path: 'pacientes/paciente-form', component: PacienteFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_USER']}},
-  {path: 'pacientes/paciente-form/:idPaciente', component: PacienteFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_USER']}}
+  {path: 'pacientes/paciente-form/:idPaciente', component: PacienteFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_USER']}},
+  {path: 'citas', component: CitasComponent}
 ]
 
 @NgModule({
@@ -89,14 +92,15 @@ const routes: Routes = [
     PacienteFormComponent,
     DetallePacienteComponent,
     ModalHabilitarComponent,
-    HomeComponent
+    HomeComponent,
+    CitasComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    BrowserAnimationsModule, MatDatepickerModule, MatMomentDateModule,
+    BrowserAnimationsModule, MatDatepickerModule, MatMomentDateModule, MatTableModule,
     FontAwesomeModule,
     ReactiveFormsModule,
     MatAutocompleteModule,

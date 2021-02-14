@@ -28,6 +28,7 @@ export class EmpleadoService {
   /* quita por el interceptor
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});*/
 
+  // HttpClient: utilizado para hacer llamadas a una API REST(CRUD) y obtener resultados de la misma
   constructor(private http: HttpClient, private router: Router/*, *por auth.interceptor* private authService: AuthService*/) { }
 
   /* se quita por que se creo el interceptor

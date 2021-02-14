@@ -1,0 +1,49 @@
+<div class="container card border-secondary my-3">
+    <div class="card-header">Lista de citas</div>
+    <div class="card-body text-dark table-responsive">
+        <table class="table table-sm table-striped table-hover text-center">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Paciente</th>
+                    <th>Doctor(a)</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Servicio</th>
+                    <th>Costo</th>
+                    <th>Pago realizado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cita of citas; let i = index">
+                    <td>{{i + 1}}</td>
+                    <td>
+                        {{cita.paciente.nombre + " " + cita.paciente.apellido}}
+                        <span class="d-block text-secondary">
+                            <fa-icon [icon]="faPhone"></fa-icon>
+                            {{cita.paciente.celular}}
+                        </span>
+                    </td>
+                    <td>{{cita.empleado.nombre + " " + cita.empleado.apellido}}</td>
+                    <td>{{cita.fecha | date:'dd MMMM yyyy'}}</td>
+                    <td class="text-info">{{cita.hora}}</td>
+                    <td>{{cita.servicio.servicio}}</td>
+                    <td>$ {{cita.costo | number:'1.0-0'}}</td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-sm" *ngIf="cita.saldo==1">
+                            Si <fa-icon [icon]="faCheck"></fa-icon>
+                        </button>
+                        <button type="button" class="btn btn-warning btn-sm" *ngIf="cita.saldo==0">
+                            No <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" name="editar" class="btn btn-info btn-sm mr-2">Editar</button>
+                        <button type="button" name="eliminar" class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
