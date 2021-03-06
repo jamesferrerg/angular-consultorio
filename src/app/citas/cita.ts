@@ -7,7 +7,7 @@ export class Cita{
     fecha: string;
     hora: string;
     costo: number;
-    saldo: number;
+    saldo: boolean = false;
     servicio: Servicio;
     empleado: Empleado;
     paciente: Paciente;

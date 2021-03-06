@@ -49,6 +49,8 @@ import { HomeComponent } from './home/home.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { CommonModule } from '@angular/common';
 import { CitasComponent } from './citas/citas.component';
+import { CitaFormComponent } from './citas/cita-form.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 registerLocaleData(localeES, 'es-CO');
 
@@ -69,7 +71,9 @@ const routes: Routes = [
   {path: 'pacientes', component: PacientesComponent},
   {path: 'pacientes/paciente-form', component: PacienteFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_USER']}},
   {path: 'pacientes/paciente-form/:idPaciente', component: PacienteFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_USER']}},
-  {path: 'citas', component: CitasComponent}
+  {path: 'citas', component: CitasComponent},
+  {path: 'citas/cita-form', component: CitaFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_USER']}},
+  {path: 'citas/cita-form/:idCita', component: CitaFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_USER']}}
 ]
 
 @NgModule({
@@ -93,7 +97,8 @@ const routes: Routes = [
     DetallePacienteComponent,
     ModalHabilitarComponent,
     HomeComponent,
-    CitasComponent
+    CitasComponent,
+    CitaFormComponent
   ],
   imports: [
     BrowserModule,
@@ -114,6 +119,7 @@ const routes: Routes = [
     NgxPaginationModule,
     RecaptchaModule, RecaptchaFormsModule,
     CommonModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [EmpleadoService,
     { provide: LOCALE_ID, useValue: 'es-CO' },

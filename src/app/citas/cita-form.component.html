@@ -1,0 +1,105 @@
+<div class="container card bg-white mt-3 mb-3">
+    <div class="card-header">Agendamiento de cita</div>
+    <div class="card-body">
+        <h4 class="card-title">
+            <a [routerLink]="['/citas']" class="btn btn-light btn-xs">&laquo; volver</a>
+        </h4>
+
+        <form #citaForm="ngForm">
+            <fieldset class="border p-2">
+                <legend class="w-auto">Datos de la cita</legend>
+                <div class="form-row">
+                    <div class="col-md-3 mb-1 mr-sm-5">
+                        <!--<label for="nombre" class="col-form-label">Seleccionar dr(a)</label>
+                        <input [(ngModel)]="cita.empleado" type="text" class="form-control" list="options" placeholder="Buscar doctor(a)..." [formControl]="autocompleteControlEmpl">
+                        <datalist id="options" #auto="" (optionSelected)="seleccionarEmpleado($event)">
+                            <option *ngFor="let lista of empleadosFiltrados | async" [ngValue]="lista">
+                                {{lista.nombre + ' ' + lista.apellido}}
+                            </option>
+                        </datalist>-->
+
+                        <mat-form-field>
+                            <input [(ngModel)]="cita.empleado" type="text" placeholder="Seleccione el dr(a)" aria-label="Empleados" matInput [formControl]="autocompleteControlEmpl" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarNombreEmpl" (optionSelected)="seleccionarEmpleado($event)">
+                                <mat-option *ngFor="let option of empleadosFiltrados | async" [value]="option">
+                                    {{option.nombre + ' ' + option.apellido}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="col-md-3 mb-1">
+                        <label for="fechaCita" class="col-form-label">Fecha de agendamiento - cita</label><br>
+                        <input [matDatepicker]="myDatepicker" class="form-control size-date" [(ngModel)]="cita.fecha" name="fechaCita" placeholder="dd/mm/yyyy">
+                        <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #myDatepicker></mat-datepicker>
+                    </div>
+
+                    <div class="col-md-3 mb-1">
+                        <label for="hora" class="col-form-label">Hora de la cita</label>
+                        <div class="ngx-timepicker">
+                            <ngx-timepicker-field matInput [(ngModel)]="cita.hora" name="horaCita" type="text"></ngx-timepicker-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3 mb-1 mr-sm-5">
+                        <!--<label for="nombrePac" class="col-form-label">Seleccionar paciente</label>
+                        <input [(ngModel)]="cita.paciente" type="text" class="form-control" list="opciones" placeholder="Buscar por nombre..." [formControl]="autocompleteControl">
+                        <datalist id="opciones" (optionSelected)="seleccionarPaciente($event)">
+                            <option *ngFor="let item of pacientesFiltrados | async" [ngValue]="item">
+                                {{item.nombre + ' ' + item.apellido}}
+                            </option>
+                        </datalist>-->
+                        <mat-form-field>
+                            <input [(ngModel)]="cita.paciente" type="text" placeholder="Seleccione paciente" aria-label="Paciente" matInput [formControl]="autocompleteControl" [matAutocomplete]="autoPac">
+                            <mat-autocomplete #autoPac="matAutocomplete" [displayWith]="mostrarNombrePac" (optionSelected)="seleccionarPaciente($event)">
+                                <mat-option *ngFor="let option of pacientesFiltrados | async" [value]="option">
+                                    {{option.nombre + ' ' + option.apellido}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4 mb-1 mr-sm-5">
+                        <label for="tipoServicio" class="col-form-label">Servicio</label>
+                        <select [compareWith]="compararServicio" class="form-control" [(ngModel)]="cita.servicio" name="tipoServicio">
+                            <option [ngValue]="undefined">-- Seleccionar servicio --</option>
+                            <option *ngFor="let item of servicios" [ngValue]="item">{{item.servicio}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3 mr-sm-5 mb-1">
+                        <label for="costo" class="col-form-label">Fijar costo de la cita</label>
+                        <input type="number" class="form-control" [(ngModel)]="cita.costo" name="costo">
+                    </div>
+                    <div class="custom-control custom-checkbox col-md-3 mr-sm-5 mb-1">
+                        <label for="costo" class="col-form-label">¿Pago realizado?</label>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" [(ngModel)]="cita.saldo" [value]="true">
+                            <label class="custom-control-label" for="customRadio1">Si</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" [(ngModel)]="cita.saldo" [value]="false">
+                            <label class="custom-control-label" for="customRadio2">No</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset><br>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <button class="btn btn-primary" role="button" (click)='create()' [disabled]="!citaForm.form.valid" *ngIf="!cita.idCita else elseBlock">Guardar</button>
+                    <ng-template #elseBlock>
+                        <button class="btn btn-primary" role="button" (click)='update()' [disabled]="!citaForm.form.valid">Editar</button>
+                    </ng-template>
+                </div>
+            </div>
+
+        </form>
+        <ul class="container alert alert-danger pl-4 mt-3" *ngIf="errores?.length > 0">
+            <li *ngFor="let itemErr of errores"> {{itemErr}} </li>
+        </ul>
+    </div>
+
+</div>
