@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Cita } from './cita';
 import { AuthService } from '../empleados/auth.service';
 import { CitaService } from './cita.service';
 import { faPhone, faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import swal from 'sweetalert2';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-citas',
@@ -17,12 +18,22 @@ export class CitasComponent implements OnInit {
   faCheck = faCheck;
   faExclamationTriangle = faExclamationTriangle;
 
+  totalRegistros = 0;
+  paginaActual = 0;
+  totalPorPagina = 8;
+  opcionTamanoPagina: number[] = [4, 8, 16, 32, 100];
+
+  // Para cambiar el idioma de matpaginator
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(public authService: AuthService, public citaService: CitaService) { }
 
   ngOnInit(): void {
+    /* Se comenta poruqe se utiliza la paginacion
     this.citaService.getCitas().subscribe(
       citas => this.citas = citas
-    );
+    );*/
+    this.calcularRangos();
   }
 
   delete(cita: Cita): void {
@@ -46,7 +57,10 @@ export class CitasComponent implements OnInit {
         this.citaService.delete(cita.idCita).subscribe(
           response => {
             // Con lo siguiente se actualiza la lista de empleados
-            this.citas = this.citas.filter( cit => cit !== cita)
+            /* La siguiente linea se comenta, ya que se utilizara la paginacion y se cambiara al metodo calcularRangos() para actualizar
+            cuando se elimine un registro, vuelva a paginar y hacer el calculo
+            this.citas = this.citas.filter( cit => cit !== cita)*/
+            this.calcularRangos();
           });
         swalWithBootstrapButtons.fire(
           'Cita eliminada!',
@@ -54,5 +68,25 @@ export class CitasComponent implements OnInit {
           'success'
         )}
     });
+  }
+
+  private calcularRangos(){
+    this.citaService.listarPaginas(this.paginaActual.toString(), this.totalPorPagina.toString())
+      .subscribe(p => 
+        {
+          this.citas = p.content as Cita[];
+          this.totalRegistros = p.totalElements as number;
+          this.paginator._intl.itemsPerPageLabel = 'Registros por página';
+          this.paginator._intl.firstPageLabel = 'Primera página';
+          this.paginator._intl.lastPageLabel = 'Ultima página';
+          this.paginator._intl.nextPageLabel = 'Página siguiente';
+          this.paginator._intl.previousPageLabel = 'Página anterior';
+        });
+  }
+
+  paginar(event: PageEvent): void {
+    this.paginaActual = event.pageIndex;
+    this.totalPorPagina = event.pageSize;
+    this.calcularRangos();
   }
 }
