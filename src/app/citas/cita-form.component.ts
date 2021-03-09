@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, filter, catchError, map, flatMap } from 'rxjs/operators';
 
 
 @Component({
@@ -29,11 +29,17 @@ export class CitaFormComponent implements OnInit {
   servicios: Servicio[];
   public errores: string[];
 
+  searchTerm: string;
+  searchResults:Observable<string[]>;
+  public searchData: any  = {};
+
   constructor(private citaService: CitaService, private router: Router, 
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.cargarCita();
+    
+    /* Se comenta, ya que no se usa angular-material para el autocomplete
     this.empleadosFiltrados = this.autocompleteControlEmpl.valueChanges
       .pipe(
         // map es convertir el objeto empleado al nombre del empleado en un valor string
@@ -46,6 +52,8 @@ export class CitaFormComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.nombre),
         flatMap(value => value ? this._filterPac(value) : [])
       );
+    */
+   
     this.citaService.getServicios().subscribe(servicios => 
       this.servicios = servicios);
   }
@@ -72,6 +80,7 @@ export class CitaFormComponent implements OnInit {
     );
   }
 
+  /* Se comenta las siguientes lineas, ya que no se usa angular-material para el autocomplete
   private _filterEmp(value: string): Observable<Empleado[]> {
     const filterValueEmp = value.toLowerCase();
 
@@ -101,6 +110,7 @@ export class CitaFormComponent implements OnInit {
     // value es generico y debe convertir en un objeto cita
     let cita = event.option.value as Cita;
   }
+  */
 
   cargarCita(): void{
     this.activatedRoute.params.subscribe(params => {
@@ -129,4 +139,51 @@ export class CitaFormComponent implements OnInit {
     );
   }
 
+  searchEmpl = (text$: Observable<string>) => {
+    return text$.pipe(
+        debounceTime(200),
+        distinctUntilChanged(),
+        filter(term => term.length >= 1),
+        // switchMap allows returning an observable rather than the final array instance
+        switchMap( (searchText) =>  this.citaService.filtrarEmpleados(searchText) )
+    );
+  }
+
+  resultFormatEmplListValue(value: any) {           
+    return value.nombre + ' ' + value.apellido;
+  } 
+  /**
+    * Initially binds the string value and then after selecting
+    * an item by checking either for string or key/value object.
+  */
+  inputFormatEmplListValue(value: any)   {
+    if(value.nombre)
+      return value.nombre + ' ' + value.apellido;
+    return value;
+  }
+
+  searchPac = (text$: Observable<string>) => {
+    return text$.pipe(
+        debounceTime(200),
+        distinctUntilChanged(),
+        filter(term => term.length >= 1),
+        // switchMap allows returning an observable rather than the final array instance
+        switchMap( (searchText) =>  this.citaService.filtrarPacientes(searchText) )
+    );
+  }
+
+  resultFormatPacListValue(value: any) {           
+    return value.nombre + ' ' + value.apellido;
+  } 
+  /**
+    * Initially binds the string value and then after selecting
+    * an item by checking either for string or key/value object.
+  */
+  inputFormatPacListValue(value: any)   {
+    if(value.nombre)
+      return value.nombre + ' ' + value.apellido;
+    return value;
+  }
+
 }
+

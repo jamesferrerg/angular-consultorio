@@ -10,13 +10,20 @@
                 <legend class="w-auto">Datos de la cita</legend>
                 <div class="form-row">
                     <div class="col-md-3 mb-1 mr-sm-5">
-                        <!--<label for="nombre" class="col-form-label">Seleccionar dr(a)</label>
-                        <input [(ngModel)]="cita.empleado" type="text" class="form-control" list="options" placeholder="Buscar doctor(a)..." [formControl]="autocompleteControlEmpl">
+                        <label for="nombre" class="col-form-label">Seleccionar dr(a)</label>
+                        <input id="typeahead-basic" name="buscar" type="text" class="form-control" 
+                            [(ngModel)]="cita.empleado" 
+                            [ngbTypeahead]="searchEmpl" 
+                            [resultFormatter]="resultFormatEmplListValue" 
+                            [inputFormatter]="inputFormatEmplListValue" 
+                            #instance="ngbTypeahead"
+                        />
+                        <!--<input [(ngModel)]="cita.empleado" type="text" class="form-control" list="options" placeholder="Buscar doctor(a)..." [formControl]="autocompleteControlEmpl">
                         <datalist id="options" #auto="" (optionSelected)="seleccionarEmpleado($event)">
                             <option *ngFor="let lista of empleadosFiltrados | async" [ngValue]="lista">
                                 {{lista.nombre + ' ' + lista.apellido}}
                             </option>
-                        </datalist>-->
+                        </datalist>
 
                         <mat-form-field>
                             <input [(ngModel)]="cita.empleado" type="text" placeholder="Seleccione el dr(a)" aria-label="Empleados" matInput [formControl]="autocompleteControlEmpl" [matAutocomplete]="auto">
@@ -25,7 +32,7 @@
                                     {{option.nombre + ' ' + option.apellido}}
                                 </mat-option>
                             </mat-autocomplete>
-                        </mat-form-field>
+                        </mat-form-field>-->
 
                     </div>
 
@@ -45,13 +52,20 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-3 mb-1 mr-sm-5">
-                        <!--<label for="nombrePac" class="col-form-label">Seleccionar paciente</label>
-                        <input [(ngModel)]="cita.paciente" type="text" class="form-control" list="opciones" placeholder="Buscar por nombre..." [formControl]="autocompleteControl">
+                        <label for="nombrePac" class="col-form-label">Seleccionar paciente</label>
+                        <input id="typeahead-basic" name="buscar" type="text" class="form-control" 
+                            [(ngModel)]="cita.paciente" 
+                            [ngbTypeahead]="searchPac" 
+                            [resultFormatter]="resultFormatPacListValue" 
+                            [inputFormatter]="inputFormatPacListValue" 
+                            #instance="ngbTypeahead"
+                        />
+                        <!--<input [(ngModel)]="cita.paciente" type="text" class="form-control" list="opciones" placeholder="Buscar por nombre..." [formControl]="autocompleteControl">
                         <datalist id="opciones" (optionSelected)="seleccionarPaciente($event)">
                             <option *ngFor="let item of pacientesFiltrados | async" [ngValue]="item">
                                 {{item.nombre + ' ' + item.apellido}}
                             </option>
-                        </datalist>-->
+                        </datalist>
                         <mat-form-field>
                             <input [(ngModel)]="cita.paciente" type="text" placeholder="Seleccione paciente" aria-label="Paciente" matInput [formControl]="autocompleteControl" [matAutocomplete]="autoPac">
                             <mat-autocomplete #autoPac="matAutocomplete" [displayWith]="mostrarNombrePac" (optionSelected)="seleccionarPaciente($event)">
@@ -59,7 +73,7 @@
                                     {{option.nombre + ' ' + option.apellido}}
                                 </mat-option>
                             </mat-autocomplete>
-                        </mat-form-field>
+                        </mat-form-field>-->
                     </div>
                     <div class="col-md-4 mb-1 mr-sm-5">
                         <label for="tipoServicio" class="col-form-label">Servicio</label>
