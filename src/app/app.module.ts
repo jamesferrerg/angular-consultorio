@@ -52,6 +52,7 @@ import { CitasComponent } from './citas/citas.component';
 import { CitaFormComponent } from './citas/cita-form.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 registerLocaleData(localeES, 'es-CO');
 
@@ -121,7 +122,7 @@ const routes: Routes = [
     RecaptchaModule, RecaptchaFormsModule,
     CommonModule,
     NgxMaterialTimepickerModule,
-    MatPaginatorModule
+    MatPaginatorModule, MatSortModule
   ],
   providers: [EmpleadoService,
     { provide: LOCALE_ID, useValue: 'es-CO' },

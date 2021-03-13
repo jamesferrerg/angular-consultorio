@@ -4,17 +4,17 @@
         <div class="my-2 d-flex justify-content-between p-2 form-inline">
             <button type="button" class="btn btn-info" [routerLink]="['/citas/cita-form']">Agendar cita</button>
         </div>
-        <table class="table table-sm table-striped table-hover text-center">
+        <table class="table table-sm table-striped table-hover" matSort (matSortChange)="sortData($event)">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Paciente</th>
-                    <th>Doctor(a)</th>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Servicio</th>
-                    <th>Costo</th>
-                    <th>Pago realizado</th>
+                    <th mat-sort-header="nombrePac">Paciente</th>
+                    <th mat-sort-header="nombreDr">Doctor(a)</th>
+                    <th mat-sort-header="fecha">Fecha</th>
+                    <th mat-sort-header="hora">Hora</th>
+                    <th mat-sort-header="servicio">Servicio</th>
+                    <th mat-sort-header="costo">Costo</th>
+                    <th mat-sort-header="saldo">Pago realizado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>

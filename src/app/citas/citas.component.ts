@@ -5,6 +5,7 @@ import { CitaService } from './cita.service';
 import { faPhone, faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import swal from 'sweetalert2';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import {Sort, MatSortModule} from '@angular/material/sort';
 
 @Component({
   selector: 'app-citas',
@@ -26,7 +27,7 @@ export class CitasComponent implements OnInit {
   // Para cambiar el idioma de matpaginator
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(public authService: AuthService, public citaService: CitaService) { }
+  constructor(public authService: AuthService, public citaService: CitaService) {}
 
   ngOnInit(): void {
     /* Se comenta poruqe se utiliza la paginacion
@@ -88,5 +89,32 @@ export class CitasComponent implements OnInit {
     this.paginaActual = event.pageIndex;
     this.totalPorPagina = event.pageSize;
     this.calcularRangos();
+  }
+
+  sortData(sort: Sort){
+    const data = this.citas.slice();
+    if (!sort.active || sort.direction === '') {
+      this.citas = data;
+      return;
+    }
+
+    this.citas = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'nombrePac': return this.compare(a.paciente.nombre, b.paciente.nombre, isAsc);
+        case 'nombreDr': return this.compare(a.empleado.nombre, b.empleado.nombre, isAsc);
+        case 'fecha': return this.compare(a.fecha, b.fecha, isAsc);
+        case 'hora': return this.compare(a.hora, b.hora, isAsc);
+        case 'servicio': return this.compare(a.servicio.servicio, b.servicio.servicio, isAsc);
+        case 'costo': return this.compare(a.costo, b.costo, isAsc);
+        case 'saldo': return this.compare(a.saldo, b.saldo, isAsc);
+        default: return 0;
+      }
+    });
+
+  }
+
+  compare = (a: number | string | boolean, b: number | string | boolean, isAsc: boolean) => {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 }
