@@ -44,6 +44,10 @@ export class CitaService {
     return this.http.get<Servicio[]>(this.urlEndPoint + '/servicios');
   }
 
+  filtrarFechas(dia: string): Observable<Cita[]>{
+    return this.http.get<Cita[]>(this.urlEndPoint + '/fecha' + `/${dia}`);
+  }
+
   create(cita: Cita): Observable<Cita>{
     return this.http.post(this.urlEndPoint, cita).pipe(
       map( (response: any) => response.cita as Cita),
@@ -96,8 +100,9 @@ export class CitaService {
     );
   }
 
-  listarPaginas(page: string, size: string): Observable<any>{
+  listarPaginas(page: string, size: string, fecha:string): Observable<any>{
     const parametros = new HttpParams()
+      .set('fecha', fecha)
       .set('page', page)
       .set('size', size);
     return this.http.get<any>(`${this.urlEndPoint}/paginar`, {params: parametros} );

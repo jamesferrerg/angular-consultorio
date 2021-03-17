@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Cita } from './cita';
 import { AuthService } from '../empleados/auth.service';
 import { CitaService } from './cita.service';
-import { faPhone, faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faCheck, faExclamationTriangle, faSearch } from '@fortawesome/free-solid-svg-icons';
 import swal from 'sweetalert2';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {Sort, MatSortModule} from '@angular/material/sort';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-citas',
@@ -18,11 +19,15 @@ export class CitasComponent implements OnInit {
   faPhone = faPhone;
   faCheck = faCheck;
   faExclamationTriangle = faExclamationTriangle;
+  faSearch = faSearch;
 
   totalRegistros = 0;
   paginaActual = 0;
   totalPorPagina = 8;
   opcionTamanoPagina: number[] = [4, 8, 16, 32, 100];
+
+  cita: Cita = new Cita();
+  dia: string = '';
 
   // Para cambiar el idioma de matpaginator
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -72,7 +77,7 @@ export class CitasComponent implements OnInit {
   }
 
   private calcularRangos(){
-    this.citaService.listarPaginas(this.paginaActual.toString(), this.totalPorPagina.toString())
+    this.citaService.listarPaginas(this.paginaActual.toString(), this.totalPorPagina.toString(), this.dia.toString())
       .subscribe(p => 
         {
           this.citas = p.content as Cita[];
@@ -117,4 +122,12 @@ export class CitasComponent implements OnInit {
   compare = (a: number | string | boolean, b: number | string | boolean, isAsc: boolean) => {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
+
+  buscarFecha(){
+    this.dia = this.dia;
+    console.log('bf - Buscar dia '+this.dia);
+    this.calcularRangos();
+    return;
+  }
+
 }
